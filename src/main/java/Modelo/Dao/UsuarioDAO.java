@@ -69,7 +69,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
 
     @Override
     public List listar() {
-        String sql = "SELECT * FROM Usuario";
+        String sql = "SELECT * FROM usuario";
         List<Usuario> lista = new ArrayList<>();
         try {
             con = cn.Conexion();
