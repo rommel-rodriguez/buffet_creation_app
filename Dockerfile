@@ -1,4 +1,5 @@
-from tomcat:9.0-jdk17-temurin-focal
+from tomcat:10.1-jdk17-temurin-focal
+# from tomcat:9.0-jdk17-temurin-focal
 
 COPY server/server.xml $CATALINA_HOME/conf/server.xml
 
