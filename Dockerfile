@@ -3,7 +3,7 @@ from tomcat:9.0-jdk17-temurin-focal
 COPY server/server.xml $CATALINA_HOME/conf/server.xml
 
 
-COPY ./build/libs/webdev_bown.war $CATALINA_HOME/webapps
+COPY ./build/libs/webapp.war $CATALINA_HOME/webapps
 
 # COPY DemoApp.war /tmp/demoapp/
 # RUN unzip DemoApp.war -d $CATALINA_HOME/webapps

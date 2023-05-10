@@ -98,7 +98,7 @@ val webAppDir = "src/main/webapp"
 tasks.war {
     // webXml = file("$webAppDir/WEB-INF/web.xml")
     from(webAppDir)
-    archiveBaseName.set("webdev_bown")
+    archiveBaseName.set("webapp")
     archiveVersion.set("")
     // classpath(fileTree("additionalLibs")) // adds a file-set to the WEB-INF/lib dir.
     // destinationDir = file("$buildDir/dist")
