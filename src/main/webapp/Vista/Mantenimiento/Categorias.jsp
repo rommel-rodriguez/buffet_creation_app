@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="https://jakarta.ee/xml/ns/jakartaee/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
     <%@ include file='/Vista/Genericos/Cabecera.jsp' %>
