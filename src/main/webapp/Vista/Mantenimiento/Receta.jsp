@@ -2,7 +2,7 @@
 <%@page import="Modelo.Entidad.Receta"%>
 <%@page import="Modelo.Entidad.Insumo"%>
 <%@page import="java.util.List"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="https://jakarta.ee/xml/ns/jakartaee/core" %>
 <%@page import="Modelo.Entidad.Medida" %>
 <%@page import="Modelo.Entidad.Categoria" %>
 <!DOCTYPE html>

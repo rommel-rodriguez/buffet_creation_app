@@ -28,7 +28,8 @@ dependencies {
     // compileOnly("jakarta.servlet:jakarta.servlet-api:5.0.0")
     // implementation("jakarta.servlet:jakarta.servlet-api:4.0.3")
     // implementation("javax.servlet:javax.servlet-api:4.0.0")
-    implementation("javax.servlet:jstl:1.2")
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0")
+    // implementation("javax.servlet:jstl:1.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8")
     implementation("mysql:mysql-connector-java:8.0.33")
 
