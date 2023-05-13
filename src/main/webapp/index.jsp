@@ -1,5 +1,11 @@
 <%@page session="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%--
+    <%
+        String contextPath = request.getContextPath();
+        String testPath = "this/is/a/test/path"; 
+    %>
+--%>
 <!DOCTYPE html>
 <html>
     <%@ include file='Vista/Genericos/Cabecera.jsp' %>

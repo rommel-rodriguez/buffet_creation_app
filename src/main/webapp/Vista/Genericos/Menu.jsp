@@ -1,3 +1,9 @@
+<%@page session="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%
+    String contextPath = request.getContextPath();
+    String testPath = "this/is/a/test/path"; 
+%>
 <nav id="sidebar">
     <br>
     <div class="temblor">
@@ -32,7 +38,7 @@
                     class="fas fa-user-cog"></i> Mantenimiento</a>
             <ul class="collapse list-unstyled" id="mantenimiento">
                 <li>
-                    <a href="Controlador?menu=Categorias&accion=Listar" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
+                    <a href=<%= "${testPath}?menu=Categorias&accion=Listar" %> class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
                     </a>
                 </li>
                 <li>
