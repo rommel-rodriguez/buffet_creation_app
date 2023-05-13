@@ -1,8 +1,11 @@
-<%@page session="true"%>
+<%-- <%@ page contentType="text/html;charset=UTF-8" language="java" %> --%>
+<%@ page isELIgnored ="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%
     String contextPath = request.getContextPath();
     String testPath = "this/is/a/test/path"; 
+    request.setAttribute("testPath", testPath);
+    pageContext.setAttribute("testPath", testPath);
 %>
 <nav id="sidebar">
     <br>
@@ -38,8 +41,13 @@
                     class="fas fa-user-cog"></i> Mantenimiento</a>
             <ul class="collapse list-unstyled" id="mantenimiento">
                 <li>
-                    <c:set value="${testPath}?menu=Categorias&accion=Listar" var="getCategories" />
-                    <a href=<c:out value="${getCategories}" /> class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
+                    <c:set var="getCategories" value="?menu=Categorias&accion=Listar" />
+                    <c:set var="testJSTLPath" value="/this/is/a/jstl/path" />
+                    <c:set var="getCats" value="${testPath}?menu=Categorias&accion=Listar" />
+                    <%-- <a href="<%= testPath %>" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
+                    <%-- <a href=<c:out value="${getCats}" /> class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
+                    <%-- <a href="${pageContext.getRequest().getAttribute('testPath')}"" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
+                    <a href="${pageContext.getAttribute('testPath')}"" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
                     </a>
                 </li>
                 <li>

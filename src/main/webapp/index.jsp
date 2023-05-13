@@ -1,4 +1,4 @@
-<%@page session="true"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%--
     <%
@@ -6,6 +6,9 @@
         String testPath = "this/is/a/test/path"; 
     %>
 --%>
+<%
+    String anotherPath = "this/is/another/path"; 
+%>
 <!DOCTYPE html>
 <html>
     <%@ include file='Vista/Genericos/Cabecera.jsp' %>
