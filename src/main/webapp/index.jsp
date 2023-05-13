@@ -1,4 +1,5 @@
 <%@page session="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
     <%@ include file='Vista/Genericos/Cabecera.jsp' %>
@@ -52,8 +53,8 @@
                             </div>
                             <div class="p-5 text-white bg-dark rounded-3">
                                 <h5>Este es el primer paso a cumplir tu objetivo</h5>
-                                <p>Elabora tu plan semanal, tenemos un extenso catálogo de ingredientes. </p>
-                                <p>¿Se te antojó un lomo saltado? ¿Quizá una ensalada César? Agrega snacks, ensaladas, bebidas y más.</p>
+                                <p>Elabora tu plan semanal, tenemos un extenso catï¿½logo de ingredientes. </p>
+                                <p>ï¿½Se te antojï¿½ un lomo saltado? ï¿½Quizï¿½ una ensalada Cï¿½sar? Agrega snacks, ensaladas, bebidas y mï¿½s.</p>
                                 <button class="btn btn-outline-light btn-block" type="button">Visualiza tus presupuestos</button>
                             </div>
                         </div>
@@ -66,7 +67,7 @@
                                     </div>
                                     <div class="col-md-2 mb-3 text-center">
                                         <h4 class="display-4"><i class="fas fa-comment-dots"></i></h4>
-                                        <button class="btn btn-outline-light btn-block" type="button">Ver más</button>
+                                        <button class="btn btn-outline-light btn-block" type="button">Ver mï¿½s</button>
                                     </div> 
                                 </div>
                             </div>
@@ -74,32 +75,32 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="card border-light my-2 p-1 bg-body rounded shadow-sm">
                                             <div class="card-body">
-                                                <h5 class="card-title">Ahorré tiempo sin dejar de comer saludable</h5>
-                                                <p class="card-text">Armando Casas, residente en Lima de 27 años, encontró que Ollita.pe es más que un simple menú nutritivo. Se trata de una experiencia culinaria que enriquece su día a día con sabor y salud.</p>
-                                                <span style="float:left;">Lima-Perú</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span>
+                                                <h5 class="card-title">Ahorrï¿½ tiempo sin dejar de comer saludable</h5>
+                                                <p class="card-text">Armando Casas, residente en Lima de 27 aï¿½os, encontrï¿½ que Ollita.pe es mï¿½s que un simple menï¿½ nutritivo. Se trata de una experiencia culinaria que enriquece su dï¿½a a dï¿½a con sabor y salud.</p>
+                                                <span style="float:left;">Lima-Perï¿½</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span>
                                             </div>
                                         </div>
                                         <div class="card border-light my-2 p-1 bg-success text-white rounded shadow-sm">
                                             <div class="card-body">
-                                                <h5 class="card-title">La salud es el reflejo de nuestros hábitos</h5>
-                                                <p class="text-white">Cynthia Vizcarra es una feliz cliente. Hoy comprobó que Ollita.pe le ayuda a cumplir tu objetivo incluso si hay una pandemia global declarada.</p>
-                                                <span style="float:left;">Lima-Perú</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                                <h5 class="card-title">La salud es el reflejo de nuestros hï¿½bitos</h5>
+                                                <p class="text-white">Cynthia Vizcarra es una feliz cliente. Hoy comprobï¿½ que Ollita.pe le ayuda a cumplir tu objetivo incluso si hay una pandemia global declarada.</p>
+                                                <span style="float:left;">Lima-Perï¿½</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="card border-light my-2 p-1 bg-primary text-white rounded shadow-sm">
                                             <div class="card-body">
-                                                <h5 class="card-title">La salud es el reflejo de nuestros hábitos</h5>
-                                                <p class="text-white">Cynthia Vizcarra es una feliz cliente. Hoy comprobó que Ollita.pe le ayuda a cumplir tu objetivo incluso si hay una pandemia global declarada.</p>
-                                                <span style="float:left;">Lima-Perú</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                                <h5 class="card-title">La salud es el reflejo de nuestros hï¿½bitos</h5>
+                                                <p class="text-white">Cynthia Vizcarra es una feliz cliente. Hoy comprobï¿½ que Ollita.pe le ayuda a cumplir tu objetivo incluso si hay una pandemia global declarada.</p>
+                                                <span style="float:left;">Lima-Perï¿½</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
                                             </div>
                                         </div>
                                         <div class="card border-light my-2 p-1 bg-body rounded shadow-sm">
                                             <div class="card-body">
-                                                <h5 class="card-title">Ahorré tiempo sin dejar de comer saludable</h5>
-                                                <p class="card-text">Armando Casas, residente en Lima de 27 años, encontró que Ollita.pe es más que un simple menú nutritivo. Se trata de una experiencia culinaria que enriquece su día a día con sabor y salud.</p>
-                                                <span style="float:left;">Lima-Perú</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                                <h5 class="card-title">Ahorrï¿½ tiempo sin dejar de comer saludable</h5>
+                                                <p class="card-text">Armando Casas, residente en Lima de 27 aï¿½os, encontrï¿½ que Ollita.pe es mï¿½s que un simple menï¿½ nutritivo. Se trata de una experiencia culinaria que enriquece su dï¿½a a dï¿½a con sabor y salud.</p>
+                                                <span style="float:left;">Lima-Perï¿½</span><span style="float:right;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
                                             </div>
                                         </div>
                                     </div>
