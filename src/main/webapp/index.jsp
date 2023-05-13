@@ -15,7 +15,7 @@
     <body>
         <div class="wrapper text-muted">
             <!-- Sidebar  -->
-            <%@ include file='Vista/Genericos/Menu.jsp' %>
+            <%@ include file='WEB-INF/views/templating/Menu.jsp' %>
             <!-- Page Content  -->
             <div id="content">
                 <%@ include file='Vista/Genericos/BarraSuperior.jsp' %>
