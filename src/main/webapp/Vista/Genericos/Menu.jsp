@@ -38,7 +38,8 @@
                     class="fas fa-user-cog"></i> Mantenimiento</a>
             <ul class="collapse list-unstyled" id="mantenimiento">
                 <li>
-                    <a href=<%= "${testPath}?menu=Categorias&accion=Listar" %> class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
+                    <c:set value="${testPath}?menu=Categorias&accion=Listar" var="getCategories" />
+                    <a href=<c:out value="${getCategories}" /> class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
                     </a>
                 </li>
                 <li>
