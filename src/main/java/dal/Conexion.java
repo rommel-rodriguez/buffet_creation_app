@@ -36,7 +36,8 @@ public class Conexion {
 		// TODO: Add port test, if port == 0, raise error
 		String uri = generateDBUri(dbhost, dbport, dbname);
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 //            con = DriverManager.getConnection(url, user, pass);
             con = DriverManager.getConnection(uri, dbUser, dbPass);
         } catch (ClassNotFoundException | SQLException ex) {
