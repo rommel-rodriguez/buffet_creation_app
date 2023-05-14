@@ -1,7 +1,7 @@
-package Modelo.Dao;
-import Modelo.entities.Usuario;
-import Modelo.interfaces.ollitaPeCRUD;
+package models.Dao;
 import dbconnection.Conexion;
+import models.entities.Usuario;
+import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
         ResultSet rs;
         try 
         {
-            con=cn.Conexion();
+            con=cn.getDBConnection();
             String sql = "select tipoUsuario from usuario where nombreUsuario=? and clave=?";
             ps=con.prepareStatement(sql);
             ps.setString(1, usu.getNombreUsuario());
@@ -43,7 +43,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
         Usuario usuario = new Usuario();
         String sql = "select * from usuario where idUsuario=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -73,7 +73,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
         String sql = "SELECT * FROM usuario";
         List<Usuario> lista = new ArrayList<>();
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -104,7 +104,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
     public int agregar(Object[] o) {
         String sql = "insert into usuario(nombreUsuario, clave, foto, tipoUsuario, estado)values(?,?,?,?,?)";
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             ps.setObject(2, o[1]);
@@ -130,7 +130,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
     public int actualizar(Object[] o) {
         String sql = "update usuario set nombreUsuario=?, clave=?, foto=?, tipoUsuario=?, estado=? where idUsuario=?";
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             ps.setObject(2, o[1]);
@@ -157,7 +157,7 @@ public class UsuarioDAO implements ollitaPeCRUD{
     public void eliminar(int cod) {
         String sql = "delete from usuario where idusuario=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {

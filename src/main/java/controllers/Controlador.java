@@ -1,14 +1,15 @@
-package Controlador;
-import Modelo.Dao.*;
-import Modelo.entities.*;
-
+package controllers;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.Dao.*;
+import models.entities.*;
+@WebServlet(name="Controlador", urlPatterns = "/Controlador")
 public class Controlador extends HttpServlet {
     Categoria cat = new Categoria();
     CategoriaDao catdao = new CategoriaDao();

@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package models.Dao;
 
-package Modelo.Dao;
-
-import Modelo.entities.Categoria;
-import Modelo.interfaces.ollitaPeCRUD;
 import dbconnection.Conexion;
+import models.entities.Comida;
+import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,24 +12,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CategoriaDao implements ollitaPeCRUD{
-
+public class ComidaDao implements ollitaPeCRUD{
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
     
-    public Categoria listarId(int cod) {
-        Categoria cat = new Categoria();
-        String sql = "select * from categoria where idCategoria=" + cod;
+    public Comida listarId(int cod) {
+        Comida com = new Comida();
+        String sql = "select * from  tipocomida where idTipoComida=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                cat.setCod(rs.getInt(1));
-                cat.setNom(rs.getString(2));
+                com.setCod(rs.getInt(1));
+                com.setNom(rs.getString(2));
             }
         } catch (SQLException e) {
             System.err.println( e);
@@ -48,26 +41,23 @@ public class CategoriaDao implements ollitaPeCRUD{
                 }
             }
         }
-        return cat;
+        return com;
     }
    @Override
     public List listar() {
-        String sql = "select * from categoria order by idCategoria";
-        List<Categoria> lista = new ArrayList<>();
+        String sql = "select * from  tipocomida order by idTipoComida";
+        List<Comida> lista = new ArrayList<>();
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Categoria cat = new Categoria();
+                Comida cat = new Comida();
                 cat.setCod(rs.getInt(1));
                 cat.setNom(rs.getString(2));
                 lista.add(cat);
             }
         } catch (SQLException e) {
-            System.err.println( e);        
-        } catch (NullPointerException e) {
-        	System.err.println("The Conexion method returns null");
             System.err.println( e);        
         } finally {
             if (con != null) {
@@ -83,9 +73,9 @@ public class CategoriaDao implements ollitaPeCRUD{
 
     @Override
     public int agregar(Object[] o) {
-        String sql = "insert into categoria(nombre)values(?)";
+        String sql = "insert into tipocomida(nombre)values(?)";
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             r = ps.executeUpdate();
@@ -105,9 +95,9 @@ public class CategoriaDao implements ollitaPeCRUD{
 
     @Override
     public int actualizar(Object[] o) {
-        String sql = "update categoria set nombre=? where idCategoria=?";
+        String sql = "update tipocomida set nombre=? where idTipoComida=?";
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             ps.setObject(2, o[1]);
@@ -128,9 +118,9 @@ public class CategoriaDao implements ollitaPeCRUD{
 
     @Override
     public void eliminar(int cod) {
-        String sql = "delete from categoria where idCategoria=" + cod;
+        String sql = "delete from tipocomida where idTipoComida=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -145,5 +135,4 @@ public class CategoriaDao implements ollitaPeCRUD{
             }
         }
     }
-
 }

@@ -1,9 +1,9 @@
 
-package Modelo.Dao;
+package models.Dao;
 
-import Modelo.entities.Menu;
-import Modelo.interfaces.ollitaPeCRUD;
 import dbconnection.Conexion;
+import models.entities.Menu;
+import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ public Menu listarId(int cod) {
         Menu ins = new Menu();
         String sql = "select * from menu where idMenu=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {

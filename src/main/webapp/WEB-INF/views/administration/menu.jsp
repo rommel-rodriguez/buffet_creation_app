@@ -1,8 +1,8 @@
-<%@page import="Modelo.entities.Insumo"%>
+<%@page import="models.entities.Insumo"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@page import="Modelo.entities.Medida" %>
-<%@page import="Modelo.entities.Categoria" %>
+<%@page import="models.entities.Medida" %>
+<%@page import="models.entities.Categoria" %>
 <!DOCTYPE html>
 <html>
     <%@ include file='/Vista/Genericos/Cabecera.jsp' %>

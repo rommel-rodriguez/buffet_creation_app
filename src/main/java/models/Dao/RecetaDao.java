@@ -1,7 +1,7 @@
-package Modelo.Dao;
-import Modelo.entities.Receta;
-import Modelo.interfaces.ollitaPeCRUD;
+package models.Dao;
 import dbconnection.Conexion;
+import models.entities.Receta;
+import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class RecetaDao implements ollitaPeCRUD{
         Receta receta = new Receta();
         String sql = "select * from cabreceta where idcabreceta=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -51,7 +51,7 @@ public class RecetaDao implements ollitaPeCRUD{
         String sql = "SELECT cabreceta.idCabReceta, cabreceta.nombre, usuario.nombreUsuario, tipocomida.nombre, cabreceta.foto, cabreceta.link, cabreceta.estado FROM cabreceta INNER JOIN usuario ON cabreceta.idUsuario = usuario.idUsuario INNER JOIN tipocomida ON cabreceta.tipo = tipocomida.idTipoComida ORDER BY cabreceta.idCabReceta";
         List<Receta> lista = new ArrayList<>();
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -83,7 +83,7 @@ public class RecetaDao implements ollitaPeCRUD{
     public int agregar(Object[] o) {
         String sql = "insert into cabreceta(nombre, idUsuario, tipo, foto, link, estado)values(?,?,?,?,?,?)";
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             ps.setObject(2, o[1]);
@@ -110,7 +110,7 @@ public class RecetaDao implements ollitaPeCRUD{
     public int actualizar(Object[] o) {
         String sql = "update insumo set nombre=?, idUsuario=?, tipo=?, foto=?, link=?, estado=? where idcabreceta=?";
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             ps.setObject(2, o[1]);
@@ -138,7 +138,7 @@ public class RecetaDao implements ollitaPeCRUD{
     public void eliminar(int cod) {
         String sql = "delete from cabreceta where idCabReceta=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {

@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package Modelo.Dao;
+package models.Dao;
 
-import Modelo.entities.Medida;
-import Modelo.interfaces.ollitaPeCRUD;
 import dbconnection.Conexion;
+import models.entities.Medida;
+import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +29,7 @@ public class MedidaDao implements ollitaPeCRUD {
         Medida med = new Medida();
         String sql = "select * from  where idMedida=" + cod;
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -57,7 +57,7 @@ public class MedidaDao implements ollitaPeCRUD {
         String sql = "select * from medida";
         List<Medida> lista = new ArrayList<>();
         try {
-            con = cn.Conexion();
+            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
