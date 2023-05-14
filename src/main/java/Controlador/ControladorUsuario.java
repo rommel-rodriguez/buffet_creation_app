@@ -1,6 +1,7 @@
 package Controlador;
 import Modelo.Dao.UsuarioDAO;
-import Modelo.Entidad.Usuario;
+import Modelo.entities.Usuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

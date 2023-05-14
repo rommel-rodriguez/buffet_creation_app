@@ -1,9 +1,10 @@
 
 package Modelo.Dao;
 
-import Configuracion.Conexion;
-import Modelo.Entidad.Menu;
-import Modelo.Interface.ollitaPeCRUD;
+import Modelo.entities.Menu;
+import Modelo.interfaces.ollitaPeCRUD;
+import dbconnection.Conexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -6,9 +6,10 @@
 
 package Modelo.Dao;
 
-import Configuracion.Conexion;
-import Modelo.Entidad.Categoria;
-import Modelo.Interface.ollitaPeCRUD;
+import Modelo.entities.Categoria;
+import Modelo.interfaces.ollitaPeCRUD;
+import dbconnection.Conexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,6 +65,9 @@ public class CategoriaDao implements ollitaPeCRUD{
                 lista.add(cat);
             }
         } catch (SQLException e) {
+            System.err.println( e);        
+        } catch (NullPointerException e) {
+        	System.err.println("The Conexion method returns null");
             System.err.println( e);        
         } finally {
             if (con != null) {

@@ -1,16 +1,7 @@
 package Controlador;
-import Modelo.Dao.CategoriaDao;
-import Modelo.Dao.ComidaDao;
-import Modelo.Dao.InsumoDao;
-import Modelo.Dao.MedidaDao;
-import Modelo.Dao.RecetaDao;
-import Modelo.Dao.UsuarioDAO;
-import Modelo.Entidad.Categoria;
-import Modelo.Entidad.Comida;
-import Modelo.Entidad.Insumo;
-import Modelo.Entidad.Medida;
-import Modelo.Entidad.Receta;
-import Modelo.Entidad.Usuario;
+import Modelo.Dao.*;
+import Modelo.entities.*;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;

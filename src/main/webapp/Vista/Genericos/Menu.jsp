@@ -47,7 +47,7 @@
                     <%-- <a href="<%= testPath %>" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
                     <%-- <a href=<c:out value="${getCats}" /> class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
                     <%-- <a href="${pageContext.getRequest().getAttribute('testPath')}"" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
-                    <a href="${pageContext.getAttribute('testPath')}"" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
+                    <%-- <a href="${pageContext.getAttribute('testPath')}"" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span> --%>
                     </a>
                 </li>
                 <li>
