@@ -13,8 +13,14 @@ public class DBConfiguration {
 	public String getName() {
 		return System.getenv(ENVVAR_DBNAME);
 	}
-	public String getPort() {
-		return System.getenv(ENVVAR_DBPORT);
+	public int getPort() {
+		int port = 0;
+		try {
+			port = Integer.parseInt(System.getenv(ENVVAR_DBPORT));
+		} catch (Exception e){
+			System.err.println(e);
+		}
+		return port;
 	}
 	public String getUser() {
 		return System.getenv(ENVVAR_DBUSER);

@@ -14,7 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import models.Dao.*;
+import dal.*;
 import models.entities.*;
 @WebServlet(name="Controlador", urlPatterns = "/Controlador")
 public class Controlador extends HttpServlet {
