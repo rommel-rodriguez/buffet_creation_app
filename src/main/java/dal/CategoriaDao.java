@@ -1,7 +1,12 @@
-package models.Dao;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import dbconnection.Conexion;
-import models.entities.Comida;
+package dal;
+
+import models.entities.Categoria;
 import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
@@ -12,23 +17,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ComidaDao implements ollitaPeCRUD{
+public class CategoriaDao implements ollitaPeCRUD{
+
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
     
-    public Comida listarId(int cod) {
-        Comida com = new Comida();
-        String sql = "select * from  tipocomida where idTipoComida=" + cod;
+    public Categoria listarId(int cod) {
+        Categoria cat = new Categoria();
+        String sql = "select * from categoria where idCategoria=" + cod;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                com.setCod(rs.getInt(1));
-                com.setNom(rs.getString(2));
+                cat.setCod(rs.getInt(1));
+                cat.setNom(rs.getString(2));
             }
         } catch (SQLException e) {
             System.err.println( e);
@@ -41,24 +47,28 @@ public class ComidaDao implements ollitaPeCRUD{
                 }
             }
         }
-        return com;
+        return cat;
     }
    @Override
     public List listar() {
-        String sql = "select * from  tipocomida order by idTipoComida";
-        List<Comida> lista = new ArrayList<>();
+        String sql = "select * from categoria order by idCategoria";
+        List<Categoria> lista = new ArrayList<>();
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Comida cat = new Comida();
+                Categoria cat = new Categoria();
                 cat.setCod(rs.getInt(1));
                 cat.setNom(rs.getString(2));
                 lista.add(cat);
             }
         } catch (SQLException e) {
-            System.err.println( e);        
+        	System.err.println("[ERROR] Problem withe the database");
+            System.err.println(e);        
+        } catch (NullPointerException e) {
+        	System.err.println("[ERROR] The Conexion method returns null");
+            System.err.println(e);        
         } finally {
             if (con != null) {
                 try {
@@ -73,7 +83,7 @@ public class ComidaDao implements ollitaPeCRUD{
 
     @Override
     public int agregar(Object[] o) {
-        String sql = "insert into tipocomida(nombre)values(?)";
+        String sql = "insert into categoria(nombre)values(?)";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -95,7 +105,7 @@ public class ComidaDao implements ollitaPeCRUD{
 
     @Override
     public int actualizar(Object[] o) {
-        String sql = "update tipocomida set nombre=? where idTipoComida=?";
+        String sql = "update categoria set nombre=? where idCategoria=?";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -118,7 +128,7 @@ public class ComidaDao implements ollitaPeCRUD{
 
     @Override
     public void eliminar(int cod) {
-        String sql = "delete from tipocomida where idTipoComida=" + cod;
+        String sql = "delete from categoria where idCategoria=" + cod;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -135,4 +145,5 @@ public class ComidaDao implements ollitaPeCRUD{
             }
         }
     }
+
 }

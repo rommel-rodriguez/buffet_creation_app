@@ -1,7 +1,6 @@
 
-package models.Dao;
+package dal;
 
-import dbconnection.Conexion;
 import models.entities.Menu;
 import models.interfaces.ollitaPeCRUD;
 

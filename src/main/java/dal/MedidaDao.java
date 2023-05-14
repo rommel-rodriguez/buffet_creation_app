@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-package models.Dao;
+package dal;
 
-import dbconnection.Conexion;
 import models.entities.Medida;
 import models.interfaces.ollitaPeCRUD;
 

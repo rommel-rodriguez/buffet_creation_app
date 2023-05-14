@@ -2,13 +2,14 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
+import dal.UsuarioDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.Dao.UsuarioDAO;
 import models.entities.Usuario;
 @WebServlet(name = "ControladorUsuario", urlPatterns = {"/ControladorUsuario"})
 public class ControladorUsuario extends HttpServlet {

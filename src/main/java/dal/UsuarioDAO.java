@@ -1,6 +1,5 @@
-package models.Dao;
-import dbconnection.Conexion;
-import models.entities.Receta;
+package dal;
+import models.entities.Usuario;
 import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
@@ -9,28 +8,50 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-public class RecetaDao implements ollitaPeCRUD{
+public class UsuarioDAO implements ollitaPeCRUD{
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
     
-    public Receta listarId(int cod) {
-        Receta receta = new Receta();
-        String sql = "select * from cabreceta where idcabreceta=" + cod;
+    public String login(Usuario usu)throws Exception
+    {
+        String estado = "";
+        ResultSet rs;
+        try 
+        {
+            con=cn.getDBConnection();
+            String sql = "select tipoUsuario from usuario where nombreUsuario=? and clave=?";
+            ps=con.prepareStatement(sql);
+            ps.setString(1, usu.getNombreUsuario());
+            ps.setString(2, usu.getClave());
+            rs= ps.executeQuery();
+            if (rs.next()) {
+                estado = "true";
+            }
+            usu.setTipoUsuario(rs.getString("tipoUsuario"));
+        } catch (Exception e) 
+        {
+            throw e;
+        }
+        return estado;
+    }
+    
+    public Usuario listarId(int cod) {
+        Usuario usuario = new Usuario();
+        String sql = "select * from usuario where idUsuario=" + cod;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                receta.setIdReceta(rs.getInt(1));
-                receta.setNombre(rs.getString(2));
-                receta.setIdUsuario(rs.getInt(3));
-                receta.setTipoComida(rs.getString(4));
-                receta.setFoto(rs.getString(5));
-                receta.setLinkReceta(rs.getString(6));
-                receta.setEstado(rs.getString(7)); 
+                usuario.setIdUsuario(rs.getInt(1));
+                usuario.setNombreUsuario(rs.getString(2));
+                usuario.setClave(rs.getString(3));
+                usuario.setFoto(rs.getString(4));
+                usuario.setTipoUsuario(rs.getString(5));
+                usuario.setEstado(rs.getString(6));
             }
         } catch (SQLException e) {
             System.err.println( e);
@@ -43,27 +64,26 @@ public class RecetaDao implements ollitaPeCRUD{
                 }
             }
         }
-        return receta;
+        return usuario;
     }
 
     @Override
     public List listar() {
-        String sql = "SELECT cabreceta.idCabReceta, cabreceta.nombre, usuario.nombreUsuario, tipocomida.nombre, cabreceta.foto, cabreceta.link, cabreceta.estado FROM cabreceta INNER JOIN usuario ON cabreceta.idUsuario = usuario.idUsuario INNER JOIN tipocomida ON cabreceta.tipo = tipocomida.idTipoComida ORDER BY cabreceta.idCabReceta";
-        List<Receta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM usuario";
+        List<Usuario> lista = new ArrayList<>();
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Receta receta = new Receta();
-                receta.setIdReceta(rs.getInt(1));
-                receta.setNombre(rs.getString(2));
-                receta.setUsuario(rs.getString(3));
-                receta.setTipoComida(rs.getString(4));
-                receta.setFoto(rs.getString(5));
-                receta.setLinkReceta(rs.getString(6));
-                receta.setEstado(rs.getString(7));                
-                lista.add(receta);
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt(1));
+                usuario.setNombreUsuario(rs.getString(2));
+                usuario.setClave(rs.getString(3));
+                usuario.setFoto(rs.getString(4));
+                usuario.setTipoUsuario(rs.getString(5)); 
+                usuario.setEstado(rs.getString(6));
+                lista.add(usuario);
             }
         } catch (SQLException e) {
             System.err.println( e);        
@@ -81,7 +101,7 @@ public class RecetaDao implements ollitaPeCRUD{
 
     @Override
     public int agregar(Object[] o) {
-        String sql = "insert into cabreceta(nombre, idUsuario, tipo, foto, link, estado)values(?,?,?,?,?,?)";
+        String sql = "insert into usuario(nombreUsuario, clave, foto, tipoUsuario, estado)values(?,?,?,?,?)";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -90,7 +110,6 @@ public class RecetaDao implements ollitaPeCRUD{
             ps.setObject(3, o[2]);
             ps.setObject(4, o[3]);
             ps.setObject(5, o[4]);
-            ps.setObject(6, o[5]);
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -108,7 +127,7 @@ public class RecetaDao implements ollitaPeCRUD{
 
     @Override
     public int actualizar(Object[] o) {
-        String sql = "update insumo set nombre=?, idUsuario=?, tipo=?, foto=?, link=?, estado=? where idcabreceta=?";
+        String sql = "update usuario set nombreUsuario=?, clave=?, foto=?, tipoUsuario=?, estado=? where idUsuario=?";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -118,7 +137,6 @@ public class RecetaDao implements ollitaPeCRUD{
             ps.setObject(4, o[3]);
             ps.setObject(5, o[4]);
             ps.setObject(6, o[5]);
-            ps.setObject(7, o[6]);
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -136,7 +154,7 @@ public class RecetaDao implements ollitaPeCRUD{
 
     @Override
     public void eliminar(int cod) {
-        String sql = "delete from cabreceta where idCabReceta=" + cod;
+        String sql = "delete from usuario where idusuario=" + cod;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -153,5 +171,4 @@ public class RecetaDao implements ollitaPeCRUD{
             }
         }
     }
-    
 }

@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package dal;
 
-package models.Dao;
-
-import dbconnection.Conexion;
-import models.entities.Categoria;
+import models.entities.Insumo;
 import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
@@ -17,25 +10,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class CategoriaDao implements ollitaPeCRUD{
-
+/*
+ * 
+ */
+public class InsumoDao implements ollitaPeCRUD{
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
-    
-    public Categoria listarId(int cod) {
-        Categoria cat = new Categoria();
-        String sql = "select * from categoria where idCategoria=" + cod;
+
+    public Insumo listarId(int cod) {
+        Insumo ins = new Insumo();
+        String sql = "select * from insumo where idInsumo=" + cod;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                cat.setCod(rs.getInt(1));
-                cat.setNom(rs.getString(2));
+                ins.setCod(rs.getInt(1));
+                ins.setNom(rs.getString(2));
+                ins.setCodCat(rs.getInt(3));
+                ins.setCodMed(rs.getInt(4));
+                ins.setPrecio(rs.getDouble(5));
             }
         } catch (SQLException e) {
             System.err.println( e);
@@ -48,26 +45,27 @@ public class CategoriaDao implements ollitaPeCRUD{
                 }
             }
         }
-        return cat;
+        return ins;
     }
-   @Override
+    
+    @Override
     public List listar() {
-        String sql = "select * from categoria order by idCategoria";
-        List<Categoria> lista = new ArrayList<>();
+        String sql = "SELECT idInsumo, nombreInsumo,categoria.nombre, medida.nombre, precio FROM insumo INNER JOIN categoria ON insumo.idCategoria = categoria.idCategoria INNER JOIN medida ON insumo.idMedida = medida.idmedida ORDER BY idInsumo";
+        List<Insumo> lista = new ArrayList<>();
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Categoria cat = new Categoria();
-                cat.setCod(rs.getInt(1));
-                cat.setNom(rs.getString(2));
-                lista.add(cat);
+                Insumo ins = new Insumo();
+                ins.setCod(rs.getInt(1));
+                ins.setNom(rs.getString(2));
+                ins.setCategoria(rs.getString(3));
+                ins.setMedida(rs.getString(4));
+                ins.setPrecio(rs.getDouble(5));
+                lista.add(ins);
             }
         } catch (SQLException e) {
-            System.err.println( e);        
-        } catch (NullPointerException e) {
-        	System.err.println("The Conexion method returns null");
             System.err.println( e);        
         } finally {
             if (con != null) {
@@ -83,11 +81,14 @@ public class CategoriaDao implements ollitaPeCRUD{
 
     @Override
     public int agregar(Object[] o) {
-        String sql = "insert into categoria(nombre)values(?)";
+        String sql = "insert into insumo(nombreInsumo, idCategoria, idMedida, precio)values(?,?,?,?)";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
+            ps.setObject(2, o[1]);
+            ps.setObject(3, o[2]);
+            ps.setObject(4, o[3]);
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -105,12 +106,15 @@ public class CategoriaDao implements ollitaPeCRUD{
 
     @Override
     public int actualizar(Object[] o) {
-        String sql = "update categoria set nombre=? where idCategoria=?";
+        String sql = "update insumo set nombreInsumo=?, idCategoria=?, idMedida=?, precio=? where idInsumo=?";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o[0]);
             ps.setObject(2, o[1]);
+            ps.setObject(3, o[2]);
+            ps.setObject(4, o[3]);
+            ps.setObject(5, o[4]);
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -128,7 +132,7 @@ public class CategoriaDao implements ollitaPeCRUD{
 
     @Override
     public void eliminar(int cod) {
-        String sql = "delete from categoria where idCategoria=" + cod;
+        String sql = "delete from insumo where idInsumo=" + cod;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -145,5 +149,4 @@ public class CategoriaDao implements ollitaPeCRUD{
             }
         }
     }
-
 }

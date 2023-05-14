@@ -2,6 +2,13 @@ package controllers;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+
+import dal.CategoriaDao;
+import dal.ComidaDao;
+import dal.InsumoDao;
+import dal.MedidaDao;
+import dal.RecetaDao;
+import dal.UsuarioDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
