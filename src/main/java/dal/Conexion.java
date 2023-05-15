@@ -43,6 +43,10 @@ public class Conexion {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println(String.format("[ERROR] DB URI: %s", uri));
+            System.err.println(String.format("[ERROR] DB User: %s", dbUser));
+            System.err.println(
+                String.format("[ERROR] DB User's Password: %s", dbPass)
+                );
         }
         return con;
     }
