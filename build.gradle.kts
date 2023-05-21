@@ -28,6 +28,13 @@ dependencies {
     // implementation("jakarta.el:jakarta.el-api:5.0.0")
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
     implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0")
+
+    // implementation("jakarta.faces:jakarta.faces-api:4.0.0")
+    // implementation("org.glassfish:jakarta.faces:4.0.2") 
+
+    // implementation("jakarta.faces:jakarta.faces-api:3.0.0")
+
+
     // implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0")
     // implementation("javax.servlet:jstl:1.2")
     // implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
