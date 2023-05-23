@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CategoriaDao implements ollitaPeCRUD{
+public class CategoriaDAO implements ollitaPeCRUD{
 
     Conexion cn = new Conexion();
     Connection con;

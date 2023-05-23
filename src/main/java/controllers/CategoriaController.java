@@ -11,19 +11,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 // import models.entities.Usuario;
+import dal.CategoriaDAOI;
+import dal.CategoriaDAO;
 
 /**
  * Servlet implementation class CategoriaController
  */
-@WebServlet(name = "CategoriaController", urlPatterns = {"/categoria"})
+@WebServlet(name = "CategoriaController", urlPatterns = {"/categorias"})
 public class CategoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	CategoriaDAOI catDao = new CategoriaDAO(); 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CategoriaController() {
         super();
+        
         // TODO Auto-generated constructor stub
     }
 
@@ -33,6 +37,9 @@ public class CategoriaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List listaCategorias = catdao.listar();
+		request.setAttribute("categorias", listaCategorias);
+		request.getRequestDispatcher("Vista/Mantenimiento/Categorias.jsp").forward(request, response);
 	}
 
 	/**

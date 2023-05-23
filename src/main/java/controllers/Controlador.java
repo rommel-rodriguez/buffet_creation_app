@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
-import dal.CategoriaDao;
+import dal.CategoriaDAO;
 import dal.ComidaDao;
 import dal.InsumoDao;
 import dal.MedidaDao;
@@ -19,7 +19,7 @@ import models.entities.*;
 @WebServlet(name="Controlador", urlPatterns = "/Controlador")
 public class Controlador extends HttpServlet {
     Categoria cat = new Categoria();
-    CategoriaDao catdao = new CategoriaDao();
+    CategoriaDAO catdao = new CategoriaDAO();
     Comida com = new Comida();
     ComidaDao comdao = new ComidaDao();
     Medida medida = new Medida();

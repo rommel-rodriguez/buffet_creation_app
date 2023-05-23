@@ -32,7 +32,7 @@
                     class="fas fa-user-cog"></i> Mantenimiento</a>
             <ul class="collapse list-unstyled" id="mantenimiento">
                 <li>
-                    <a href="Controlador?menu=Categorias&accion=Listar" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
+                    <a href="categorias?menu=Categorias&accion=Listar" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
                     </a>
                 </li>
                 <li>
