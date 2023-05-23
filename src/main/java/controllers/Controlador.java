@@ -102,9 +102,7 @@ public class Controlador extends HttpServlet {
         
         if (menu.equals("Comidas")) {
             if (accion.equals("Listar")) {
-                List listaComidas = comdao.listar();
-                request.setAttribute("comidas", listaComidas);
-                request.getRequestDispatcher("Vista/Mantenimiento/Comidas.jsp").forward(request, response);
+            	;
             } else {
                 switch (accion) {
                     case "AgregarComida":
