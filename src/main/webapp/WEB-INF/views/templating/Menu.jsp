@@ -1,7 +1,8 @@
 <nav id="sidebar">
     <br>
     <div class="temblor">
-        <img src="assets/img/cacerola.png" alt="user" class="" width="200">
+        <!-- <img src="assets/img/cacerola.png" alt="user" class="" width="200"> -->
+        <img src="${contextPath}/assets/img/cacerola.png" alt="user" class="" width="200">
     </div>
     <ul class="list-unstyled components">
         <p>Bienvenido</p>
@@ -32,7 +33,7 @@
                     class="fas fa-user-cog"></i> Mantenimiento</a>
             <ul class="collapse list-unstyled" id="mantenimiento">
                 <li>
-                    <a href="categorias?menu=Categorias&accion=Listar" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
+                    <a href="categorias/" class="link-light"> <i class="fas fa-list-ol"></i> <span class="nav_name">Categor�as</span>
                     </a>
                 </li>
                 <li>

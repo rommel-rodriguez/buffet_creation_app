@@ -1,5 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page import="utils.tools.AppPath" %>
+  
+<c:set var="appPath" value="<%= new utils.tools.AppPath()%>" />
+<c:set var="cabeceraPath" value="${appPath.convertToView('templating/Cabecera.jsp')}" />
+<c:set var="menuPath" value="${appPath.convertToView('templating/Menu.jsp')}" />
+<c:set var="barraPath" value="${appPath.convertToView('templating/BarraSuperior.jsp')}" />
+<c:set var="scriptsPath" value="${appPath.convertToView('templating/Scripts.jsp')}" />
+
+<c:set var = "contextPath" value = "${pageContext.servletContext.contextPath}" /> 
+
 <%--
     <%
         String contextPath = request.getContextPath();
@@ -11,14 +21,17 @@
 %>
 <!DOCTYPE html>
 <html>
-    <%@ include file='Vista/Genericos/Cabecera.jsp' %>
+    <%-- <%@ include file='Vista/Genericos/Cabecera.jsp' %> --%>
+    <jsp:include page="${cabeceraPath}" />
     <body>
         <div class="wrapper text-muted">
             <!-- Sidebar  -->
-            <%@ include file='WEB-INF/views/templating/Menu.jsp' %>
+            <%-- <%@ include file='WEB-INF/views/templating/Menu.jsp' %> --%>
+						<jsp:include page="${menuPath}" />
             <!-- Page Content  -->
             <div id="content">
-                <%@ include file='Vista/Genericos/BarraSuperior.jsp' %>
+                <%-- <%@ include file='Vista/Genericos/BarraSuperior.jsp' %> --%>
+								<jsp:include page="${barraPath}" />
                 <div class="ollita">
                     <div class="row">
                         <div class="col-md-12 mb-3">
@@ -41,13 +54,13 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="assets/img/food1.jpg" class="d-block w-100" alt="...">
+                                            <img src="${contextPath}/assets/img/food1.jpg" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="assets/img/food2.jpg" class="d-block w-100" alt="...">
+                                            <img src="${contextPath}/assets/img/food2.jpg" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="assets/img/food3.jpg" class="d-block w-100" alt="...">
+                                            <img src="${contextPath}/assets/img/food3.jpg" class="d-block w-100" alt="...">
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -119,6 +132,7 @@
                     </div>
                 </div>
             </div>
-            <%@ include file='Vista/Genericos/Scripts.jsp' %>
+            <%-- <%@ include file='Vista/Genericos/Scripts.jsp' %>--%>
+						<jsp:include page="${scriptsPath}" />
     </body>
 </html>

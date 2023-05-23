@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var = "contextPath" value = "${pageContext.servletContext.contextPath}" /> 
 <!DOCTYPE html>
 <html>
     <%@ include file='/Vista/Genericos/Cabecera.jsp' %>
@@ -68,13 +69,13 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="assets/img/food1.jpg" class="d-block w-100" alt="...">
+                                            <img src="${contextPath}/assets/img/food1.jpg" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="assets/img/food2.jpg" class="d-block w-100" alt="...">
+                                            <img src="${contextPath}/assets/img/food2.jpg" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="assets/img/food3.jpg" class="d-block w-100" alt="...">
+                                            <img src="${contextPath}/assets/img/food3.jpg" class="d-block w-100" alt="...">
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

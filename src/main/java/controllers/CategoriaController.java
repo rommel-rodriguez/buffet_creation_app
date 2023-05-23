@@ -10,17 +10,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.entities.Categoria;
 // import models.entities.Usuario;
 import dal.CategoriaDAOI;
 import dal.CategoriaDAO;
+import utils.tools.AppPath;
 
 /**
  * Servlet implementation class CategoriaController
  */
-@WebServlet(name = "CategoriaController", urlPatterns = {"/categorias"})
+//@WebServlet(name = "CategoriaController", urlPatterns = {"/categorias"})
+@WebServlet(name = "CategoriaController", value = {"/categorias", "/categorias/"})
 public class CategoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CategoriaDAOI catDao = new CategoriaDAO(); 
+	String categoriasView = new AppPath()
+			.convertToView("administration/Categorias.jsp");
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,10 +41,16 @@ public class CategoriaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		List listaCategorias = catdao.listar();
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("Hitting this endpoint");
+		List<Categoria> listaCategorias = catDao.listCategorias();
 		request.setAttribute("categorias", listaCategorias);
-		request.getRequestDispatcher("Vista/Mantenimiento/Categorias.jsp").forward(request, response);
+//		request.getRequestDispatcher("Vista/Mantenimiento/Categorias.jsp").forward(request, response);
+		System.out.printf("This is categoriasView's Path: %s\n", categoriasView);
+		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());
+		System.out.printf("This is the context Path: %s\n", getServletContext().getContextPath());
+//		request.getRequestDispatcher(categoriasView).forward(request, response);
+		getServletContext().getRequestDispatcher(categoriasView).forward(request, response);
 	}
 
 	/**

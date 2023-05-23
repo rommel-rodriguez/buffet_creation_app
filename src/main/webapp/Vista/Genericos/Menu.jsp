@@ -10,7 +10,7 @@
 <nav id="sidebar">
     <br>
     <div class="temblor">
-        <img src="assets/img/cacerola.png" alt="user" class="" width="200">
+        <img src="${contextPath}/assets/img/cacerola.png" alt="user" class="" width="200">
     </div>
     <ul class="list-unstyled components">
         <p>Bienvenido</p>

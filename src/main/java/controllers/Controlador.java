@@ -61,9 +61,7 @@ public class Controlador extends HttpServlet {
         }
         if (menu.equals("Categorias")) {
             if (accion.equals("Listar")) {
-                List listaCategorias = catdao.listar();
-                request.setAttribute("categorias", listaCategorias);
-                request.getRequestDispatcher("Vista/Mantenimiento/Categorias.jsp").forward(request, response);
+            	;
             } else {
                 switch (accion) {
                     case "AgregarCategoria":

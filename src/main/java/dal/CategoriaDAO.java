@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CategoriaDAO implements ollitaPeCRUD{
+public class CategoriaDAO implements CategoriaDAOI{
 
     Conexion cn = new Conexion();
     Connection con;
@@ -25,9 +25,10 @@ public class CategoriaDAO implements ollitaPeCRUD{
     ResultSet rs;
     int r;
     
-    public Categoria listarId(int cod) {
+    public Categoria showCategoria(int id) {
         Categoria cat = new Categoria();
-        String sql = "select * from categoria where idCategoria=" + cod;
+        // TODO: Give proper/secure form to this query string
+        String sql = "select * from categoria where idCategoria=" + id;
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -50,7 +51,7 @@ public class CategoriaDAO implements ollitaPeCRUD{
         return cat;
     }
    @Override
-    public List listar() {
+    public List<Categoria> listCategorias() {
         String sql = "select * from categoria order by idCategoria";
         List<Categoria> lista = new ArrayList<>();
         try {
@@ -82,12 +83,13 @@ public class CategoriaDAO implements ollitaPeCRUD{
     }
 
     @Override
-    public int agregar(Object[] o) {
+    public void createCategoria(Categoria categoria) {
         String sql = "insert into categoria(nombre)values(?)";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
+            //ps.setObject(1, o[0]);
+            ps.setString(1, categoria.getNom());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -100,17 +102,19 @@ public class CategoriaDAO implements ollitaPeCRUD{
                 }
             }
         }
-        return r;
+        return;
     }
 
     @Override
-    public int actualizar(Object[] o) {
+    public void updateCategoria(Categoria categoria) {
         String sql = "update categoria set nombre=? where idCategoria=?";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
-            ps.setObject(2, o[1]);
+//            ps.setObject(1, o[0]);
+//            ps.setObject(2, o[1]);
+            ps.setString(1, categoria.getNom());
+            ps.setInt(2, categoria.getCod());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -123,11 +127,11 @@ public class CategoriaDAO implements ollitaPeCRUD{
                 }
             }
         }
-        return r;
+        return;
     }
 
     @Override
-    public void eliminar(int cod) {
+    public void deleteCategoria(int cod) {
         String sql = "delete from categoria where idCategoria=" + cod;
         try {
             con = cn.getDBConnection();
@@ -145,5 +149,10 @@ public class CategoriaDAO implements ollitaPeCRUD{
             }
         }
     }
+	@Override
+	public void storeCategoria(Categoria categoria) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
