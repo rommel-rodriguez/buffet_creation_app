@@ -25,7 +25,7 @@
                             <div class="card border-light my-2 p-1 bg-body rounded shadow-sm">
                                 <div class="card-body">
                                     <h3><i class="fas fa-home"></i> Home</h3>
-                                    <h5 class="text-muted font-weight-normal mb-0 w-100 text-truncate"><i class="fas fa-arrow-right"></i> Ollita.pe - Tu alternativa para comer saludable y de acuerdo a tu presupuesto.</h5>  
+                                    <h5 class="text-muted font-weight-normal mb-0 w-100 text-truncate"><i class="fas fa-arrow-right"></i> Cacerola - Tu alternativa para comer saludable y de acuerdo a tu presupuesto.</h5>  
                                 </div>
                             </div>
                         </div>
