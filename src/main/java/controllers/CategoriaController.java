@@ -63,34 +63,57 @@ public class CategoriaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// TODO: Surroung all Connection related code with appropriate try-catch
+		// blocks.
+		Conexion conFactory = new Conexion();
+        Connection con;
+		con = conFactory.getDBConnection();
+		CategoriaDAOI catDao = new CategoriaDAO(con); 
+		String accion = request.getParameter("accion");
+//		System.out.printf(
+//				"Categorias PostMethod: accion=%s\n",
+//				accion
+//				);
 
-//		String accion = request.getParameter("accion");
 //
-//        switch (accion) {
-//			case "AgregarCategoria" :
-//				String categoria = request.getParameter("txtCategoria");
-//				Object[] obCat = new Object[1];
-//				obCat[0] = categoria;
-//				catdao.agregar(obCat);
+        switch (accion) {
+			case "AgregarCategoria" :
+				String nomCategoria = request.getParameter("txtCategoria");
+				Categoria objCat = new Categoria(); 
+				objCat.setNom(nomCategoria);
+				
+				catDao.createCategoria(objCat);
 //				flag = "CAT";
 //				request.setAttribute("flag", flag);
 //				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-//				break;
-//            case "ActualizarCategoria":
-//				String categoriaUp = request.getParameter("txtCategoria");
-//				String codCatUp = request.getParameter("txtCod");
+//				request.getRequestDispatcher(categoriasView).forward(request, response);
+				doGet(request, response);
+				break;
+			case "EditarCategoria":
+				int idCatEdit = Integer.parseInt(request.getParameter("cod"));
+				Categoria catEditar = catDao.showCategoria(idCatEdit);
+				request.setAttribute("categoria", catEditar);
+//				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+				doGet(request, response);
+				break;
+            case "ActualizarCategoria":
+				String categoriaUp = request.getParameter("txtCategoria");
+				int codCatUp = Integer.parseInt(request.getParameter("txtCod"));
 //				Object[] obCatUp = new Object[2];
+				Categoria obCatUp = new Categoria();
+				obCatUp.setCod(codCatUp);
+				obCatUp.setNom(categoriaUp);
 //				obCatUp[0] = categoriaUp;
 //				obCatUp[1] = codCatUp;
-//				catdao.(obCatUp);
+//				catDao.(obCatUp);
+				catDao.updateCategoria(obCatUp);
+				doGet(request, response);
 //				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-//				break;
-//			default:
-//				Exception e;
-//				break;
-//        }
+				break;
+			default:
+				Exception e;
+				break;
+        }
 	}
 
 }

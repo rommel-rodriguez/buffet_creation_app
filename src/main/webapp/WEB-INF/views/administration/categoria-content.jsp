@@ -10,7 +10,7 @@
 											<div class="card-body">
 													<h4><i class="fas fa-list-ol"></i> Mantenimiento de Categorías</h4>
 													<hr class="mb-4">
-													<form class="needs-validation" action="Controlador?menu=Categorias" method="POST">
+													<form class="needs-validation" action="${rootPath}/categorias/" method="POST">
 															<input type="hidden" value="${categoria.getCod()}" name="txtCod" readonly="true">
 															<div class="row">
 																	<div class="col-md-6 mb-3">
@@ -42,8 +42,16 @@
 																					<td>${categ.getCod()}</th>
 																					<td>${categ.getNom()}</td>
 																					<td>
-																							<a class="btn btn-sm btn-primary btn-circle" href="Controlador?menu=Categorias&accion=EditarCategoria&cod=${categ.getCod()}"><i class=" fas fa-edit"></i></a>
+																							<%-- <a class="btn btn-sm btn-primary btn-circle" href="Controlador?menu=Categorias&accion=EditarCategoria&cod=${categ.getCod()}"><i class=" fas fa-edit"></i></a>--%>
+																						<form id="in_table_form" action="${rootPath}/categorias/" method="POST">
+																						  <%--
+																							<a class="btn btn-sm btn-primary btn-circle" href="${rootPath}/categorias/?accion=EditarCategoria&cod=${categ.getCod()}"><i class=" fas "></i></a>
 																							<a class="btn btn-sm btn-danger btn-circle" href="Controlador?menu=Categorias&accion=EliminarCategoria&cod=${categ.getCod()}"><i class="fas fa-trash-alt"></i></a>
+																						   --%>
+																							<input type="hidden" value="${categ.getCod()}" name="cod" readonly="true">
+																							<button type="submit" name="accion" value="EditarCategoria" class="btn btn-sm btn-primary btn-circle" ><i class="fas fa-edit"></i> </button>
+																							<button type="submit" name="accion" value="EliminarCategoria" class="btn btn-sm btn-danger btn-circle" ><i class="fas fa-trash-alt"></i></button>
+																						</form>
 																					</td>
 																			</tr> 
 																	</c:forEach>
