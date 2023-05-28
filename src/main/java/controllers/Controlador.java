@@ -63,40 +63,41 @@ public class Controlador extends HttpServlet {
             if (accion.equals("Listar")) {
             	;
             } else {
-                switch (accion) {
-                    case "AgregarCategoria":
-                        String categoria = request.getParameter("txtCategoria");
-                        Object[] obCat = new Object[1];
-                        obCat[0] = categoria;
-                        catdao.agregar(obCat);
-                        flag = "CAT";
-                        request.setAttribute("flag", flag);
-                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-                        break;
-                    case "EditarCategoria":
-                        int idCatEdit = Integer.parseInt(request.getParameter("cod"));
-                        Categoria catEditar = catdao.listarId(idCatEdit);
-                        request.setAttribute("categoria", catEditar);
-                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-                        break;
-                    case "ActualizarCategoria":
-                        String categoriaUp = request.getParameter("txtCategoria");
-                        String codCatUp = request.getParameter("txtCod");
-                        Object[] obCatUp = new Object[2];
-                        obCatUp[0] = categoriaUp;
-                        obCatUp[1] = codCatUp;
-                        catdao.actualizar(obCatUp);
-                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-                        break;
-                    case "EliminarCategoria":
-                        int idCatElim = Integer.parseInt(request.getParameter("cod"));
-                        catdao.eliminar(idCatElim);
-                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        Exception e;
-                        break;
-                }
+//                switch (accion) {
+//                    case "AgregarCategoria":
+//                        String categoria = request.getParameter("txtCategoria");
+//                        Object[] obCat = new Object[1];
+//                        obCat[0] = categoria;
+//                        catdao.agregar(obCat);
+//                        flag = "CAT";
+//                        request.setAttribute("flag", flag);
+//                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+//                        break;
+//                    case "EditarCategoria":
+//                        int idCatEdit = Integer.parseInt(request.getParameter("cod"));
+//                        Categoria catEditar = catdao.listarId(idCatEdit);
+//                        request.setAttribute("categoria", catEditar);
+//                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+//                        break;
+//                    case "ActualizarCategoria":
+//                        String categoriaUp = request.getParameter("txtCategoria");
+//                        String codCatUp = request.getParameter("txtCod");
+//                        Object[] obCatUp = new Object[2];
+//                        obCatUp[0] = categoriaUp;
+//                        obCatUp[1] = codCatUp;
+//                        catdao.actualizar(obCatUp);
+//                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+//                        break;
+//                    case "EliminarCategoria":
+//                        int idCatElim = Integer.parseInt(request.getParameter("cod"));
+//                        catdao.eliminar(idCatElim);
+//                        request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+//                        break;
+//                    default:
+//                        Exception e;
+//                        break;
+//                }
+            	;
             }
         }
         
@@ -145,7 +146,8 @@ public class Controlador extends HttpServlet {
             if (accion.equals("Listar")) {
                 List listaInsumos = insdao.listar();
                 List listaMedidas = medao.listar();
-                List listaCategorias = catdao.listar();
+                List listaCategorias = null;
+//                List listaCategorias = catdao.listar();
                 request.setAttribute("insumos", listaInsumos);
                 request.setAttribute("medidas", listaMedidas);
                 request.setAttribute("categorias", listaCategorias);

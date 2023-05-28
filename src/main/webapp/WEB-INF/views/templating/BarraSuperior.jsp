@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <button id="sidebarCollapse" class="btn btn-light" type="button"><i
