@@ -19,18 +19,22 @@ import java.util.List;
 
 public class CategoriaDAO implements CategoriaDAOI{
 
-    Conexion cn = new Conexion();
+//    Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
+    
+    public CategoriaDAO (Connection con) {
+    	this.con = con;
+    }
     
     public Categoria showCategoria(int id) {
         Categoria cat = new Categoria();
         // TODO: Give proper/secure form to this query string
         String sql = "select * from categoria where idCategoria=" + id;
         try {
-            con = cn.getDBConnection();
+            // con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -55,7 +59,7 @@ public class CategoriaDAO implements CategoriaDAOI{
         String sql = "select * from categoria order by idCategoria";
         List<Categoria> lista = new ArrayList<>();
         try {
-            con = cn.getDBConnection();
+            // con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -86,7 +90,7 @@ public class CategoriaDAO implements CategoriaDAOI{
     public void createCategoria(Categoria categoria) {
         String sql = "insert into categoria(nombre)values(?)";
         try {
-            con = cn.getDBConnection();
+            // con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             //ps.setObject(1, o[0]);
             ps.setString(1, categoria.getNom());
@@ -109,7 +113,7 @@ public class CategoriaDAO implements CategoriaDAOI{
     public void updateCategoria(Categoria categoria) {
         String sql = "update categoria set nombre=? where idCategoria=?";
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
 //            ps.setObject(1, o[0]);
 //            ps.setObject(2, o[1]);
@@ -134,7 +138,7 @@ public class CategoriaDAO implements CategoriaDAOI{
     public void deleteCategoria(int cod) {
         String sql = "delete from categoria where idCategoria=" + cod;
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {

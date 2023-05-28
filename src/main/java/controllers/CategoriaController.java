@@ -3,6 +3,7 @@ package controllers;
 import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.List;
 // import dal.UsuarioDAO;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import models.entities.Categoria;
 // import models.entities.Usuario;
 import dal.CategoriaDAOI;
 import dal.CategoriaDAO;
+import dal.Conexion;
 import utils.tools.AppPath;
 
 /**
@@ -23,7 +25,6 @@ import utils.tools.AppPath;
 @WebServlet(name = "CategoriaController", value = {"/categorias", "/categorias/"})
 public class CategoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CategoriaDAOI catDao = new CategoriaDAO(); 
 	String categoriasView = new AppPath()
 			.convertToView("administration/Categorias.jsp");
        
@@ -40,7 +41,12 @@ public class CategoriaController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO: Surroung all Connection related code with appropriate try-catch
+		// blocks.
+		Conexion conFactory = new Conexion();
+        Connection con;
+		con = conFactory.getDBConnection();
+		CategoriaDAOI catDao = new CategoriaDAO(con); 
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Hitting this endpoint");
 		List<Categoria> listaCategorias = catDao.listCategorias();
@@ -59,6 +65,32 @@ public class CategoriaController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
+//		String accion = request.getParameter("accion");
+//
+//        switch (accion) {
+//			case "AgregarCategoria" :
+//				String categoria = request.getParameter("txtCategoria");
+//				Object[] obCat = new Object[1];
+//				obCat[0] = categoria;
+//				catdao.agregar(obCat);
+//				flag = "CAT";
+//				request.setAttribute("flag", flag);
+//				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+//				break;
+//            case "ActualizarCategoria":
+//				String categoriaUp = request.getParameter("txtCategoria");
+//				String codCatUp = request.getParameter("txtCod");
+//				Object[] obCatUp = new Object[2];
+//				obCatUp[0] = categoriaUp;
+//				obCatUp[1] = codCatUp;
+//				catdao.(obCatUp);
+//				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+//				break;
+//			default:
+//				Exception e;
+//				break;
+//        }
 	}
 
 }

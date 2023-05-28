@@ -1,7 +1,9 @@
 package controllers;
 import java.io.IOException;
+
 import java.sql.Date;
 import java.util.List;
+import java.sql.*;
 
 import dal.CategoriaDAO;
 import dal.ComidaDao;
@@ -9,17 +11,20 @@ import dal.InsumoDao;
 import dal.MedidaDao;
 import dal.RecetaDao;
 import dal.UsuarioDAO;
+import dal.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.*;
 import models.entities.*;
+
 @WebServlet(name="Controlador", urlPatterns = "/Controlador")
 public class Controlador extends HttpServlet {
     Categoria cat = new Categoria();
-    CategoriaDAO catdao = new CategoriaDAO();
+	Conexion conFactory = new Conexion();
+	Connection con = conFactory.getDBConnection();
+	CategoriaDAOI catDao = new CategoriaDAO(con); 
     Comida com = new Comida();
     ComidaDao comdao = new ComidaDao();
     Medida medida = new Medida();

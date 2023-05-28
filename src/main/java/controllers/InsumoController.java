@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.sql.*;
 // import dal.UsuarioDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import models.entities.Categoria;
 // import models.entities.Usuario;
 import dal.CategoriaDAOI;
 import dal.CategoriaDAO;
+import dal.Conexion;
 import utils.tools.AppPath;
 
 /**
@@ -23,7 +25,9 @@ import utils.tools.AppPath;
 @WebServlet(name = "InsumoController", value = {"/insumos", "/insumos/"})
 public class InsumoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CategoriaDAOI catDao = new CategoriaDAO(); 
+	Conexion conFactory = new Conexion();
+	Connection con = conFactory.getDBConnection();
+	CategoriaDAOI catDao = new CategoriaDAO(con); 
 	String categoriasView = new AppPath()
 			.convertToView("administration/Categorias.jsp");
        
