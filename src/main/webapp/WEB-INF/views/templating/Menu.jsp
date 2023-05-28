@@ -10,7 +10,7 @@ request.setAttribute("rootPath", rootPath);
     <br>
     <div class="temblor">
         <!-- <img src="assets/img/cacerola.png" alt="user" class="" width="200"> -->
-        <img src="${rootPath}/assets/img/cacerola.png" alt="user" class="" width="200">
+        <img src="/assets/img/cacerola.png" alt="user" class="" width="200">
     </div>
     <ul class="list-unstyled components">
         <p>Bienvenido</p>
@@ -49,13 +49,14 @@ request.setAttribute("rootPath", rootPath);
                     <a href="${rootPath}/comidas/" class="link-light"> <i class="fas fa-hamburger"></i> <span class="nav_name">Comidas</span> </a>
                 </li>
                 <li>
-                    <a href="Controlador?menu=Insumos&accion=Listar" class="link-light"> <i class="fas fa-carrot"></i> <span class="nav_name">Insumos</span> </a>
+                    <!-- <a href="Controlador?menu=Insumos&accion=Listar" class="link-light"> <i class="fas fa-carrot"></i> <span class="nav_name">Insumos</span> </a> -->
+                    <a href="${rootPath}/Controlador?menu=Insumos&accion=Listar" class="link-light"> <i class="fas fa-carrot"></i> <span class="nav_name">Insumos</span> </a>
                 </li>
                 <li>
-                    <a href="Controlador?menu=Usuario&accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Usuarios</span> </a>
+                    <a href="${rootPath}/Controlador?menu=Usuario&accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Usuarios</span> </a>
                 </li>
                 <li>
-                    <a href="Controlador?menu=Recetas&accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Recetas</span> </a>
+                    <a href="${rootPath}/Controlador?menu=Recetas&accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Recetas</span> </a>
                 </li>
             </ul>
         </li>
