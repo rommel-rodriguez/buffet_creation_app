@@ -7,4 +7,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js"></script>
-<script src="/assets/js/script.js"></script>
+<script src="${rootPath}/assets/js/script.js"></script>
