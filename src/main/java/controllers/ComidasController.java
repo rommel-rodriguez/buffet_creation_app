@@ -26,7 +26,6 @@ import utils.tools.AppPath;
 		value = {"/comidas", "/comidas/", "/comidas/*"})
 public class ComidasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ComidaDao comDao = new ComidaDao(); 
 	String comidasView = new AppPath()
 			.convertToView("administration/Comidas.jsp");
        
@@ -46,6 +45,7 @@ public class ComidasController extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Hitting this endpoint" + request.getContextPath());
+		ComidaDao comDao = new ComidaDao(); 
 		List listaComidas = comDao.listar();
 		request.setAttribute("comidas", listaComidas);
 //		List<Categoria> listaCategorias = catDao.listCategorias();
@@ -67,6 +67,7 @@ public class ComidasController extends HttpServlet {
 		String comida = request.getParameter("txtComida");
 		Object[] obCom = new Object[1];
 		obCom[0] = comida;
+		ComidaDao comDao = new ComidaDao(); 
 		comDao.agregar(obCom);
 //		getServletContext().getRequestDispatcher(
 //				request.getContextPath() + "/" +

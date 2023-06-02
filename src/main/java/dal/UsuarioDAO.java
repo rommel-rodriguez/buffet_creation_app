@@ -8,37 +8,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-public class UsuarioDAO implements ollitaPeCRUD{
+public class UsuarioDAO implements UsuarioDAOI{
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
     
-    public String login(Usuario usu)throws Exception
-    {
-        String estado = "";
-        ResultSet rs;
-        try 
-        {
-            con=cn.getDBConnection();
-            String sql = "select tipoUsuario from usuario where nombreUsuario=? and clave=?";
-            ps=con.prepareStatement(sql);
-            ps.setString(1, usu.getNombreUsuario());
-            ps.setString(2, usu.getClave());
-            rs= ps.executeQuery();
-            if (rs.next()) {
-                estado = "true";
-            }
-            usu.setTipoUsuario(rs.getString("tipoUsuario"));
-        } catch (Exception e) 
-        {
-            throw e;
-        }
-        return estado;
+    public UsuarioDAO (Connection con) {
+    	this.con = con;
     }
     
-    public Usuario listarId(int cod) {
+//    public String login(Usuario usu)throws Exception
+//    {
+//        String estado = "";
+//        ResultSet rs;
+//        try 
+//        {
+//            con=cn.getDBConnection();
+//            String sql = "select tipoUsuario from usuario where nombreUsuario=? and clave=?";
+//            ps=con.prepareStatement(sql);
+//            ps.setString(1, usu.getNombreUsuario());
+//            ps.setString(2, usu.getClave());
+//            rs= ps.executeQuery();
+//            if (rs.next()) {
+//                estado = "true";
+//            }
+//            usu.setTipoUsuario(rs.getString("tipoUsuario"));
+//        } catch (Exception e) 
+//        {
+//            throw e;
+//        }
+//        return estado;
+//    }
+    
+    public Usuario showUsuario(int cod) {
         Usuario usuario = new Usuario();
         String sql = "select * from usuario where idUsuario=" + cod;
         try {
@@ -55,20 +59,12 @@ public class UsuarioDAO implements ollitaPeCRUD{
             }
         } catch (SQLException e) {
             System.err.println( e);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);
-                }
-            }
         }
         return usuario;
     }
 
     @Override
-    public List listar() {
+    public List<Usuario> listUsuarios() {
         String sql = "SELECT * FROM usuario";
         List<Usuario> lista = new ArrayList<>();
         try {
@@ -87,73 +83,49 @@ public class UsuarioDAO implements ollitaPeCRUD{
             }
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
         return lista;
     }
 
     @Override
-    public int agregar(Object[] o) {
+    public void createUsuario(Usuario usuario) {
         String sql = "insert into usuario(nombreUsuario, clave, foto, tipoUsuario, estado)values(?,?,?,?,?)";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
-            ps.setObject(2, o[1]);
-            ps.setObject(3, o[2]);
-            ps.setObject(4, o[3]);
-            ps.setObject(5, o[4]);
+            ps.setObject(1, usuario.getNombreUsuario());
+            ps.setObject(2, usuario.getClave());
+            ps.setObject(3, usuario.getFoto());
+            ps.setObject(4, usuario.getTipoUsuario());
+            ps.setObject(5, usuario.getEstado());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
-        }
-        return r;
+        } 
     }
 
     @Override
-    public int actualizar(Object[] o) {
+    public void updateUsuario (Usuario usuario) {
         String sql = "update usuario set nombreUsuario=?, clave=?, foto=?, tipoUsuario=?, estado=? where idUsuario=?";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
-            ps.setObject(2, o[1]);
-            ps.setObject(3, o[2]);
-            ps.setObject(4, o[3]);
-            ps.setObject(5, o[4]);
-            ps.setObject(6, o[5]);
+
+            ps.setObject(1, usuario.getNombreUsuario());
+            ps.setObject(2, usuario.getClave());
+            ps.setObject(3, usuario.getFoto());
+            ps.setObject(4, usuario.getTipoUsuario());
+            ps.setObject(5, usuario.getEstado());
+            ps.setObject(6, usuario.getIdUsuario());
+
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
-        return r;
     }
 
     @Override
-    public void eliminar(int cod) {
+    public void deleteUsuario (int cod) {
         String sql = "delete from usuario where idusuario=" + cod;
         try {
             con = cn.getDBConnection();
@@ -161,14 +133,12 @@ public class UsuarioDAO implements ollitaPeCRUD{
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
-        }
+        } 
     }
+
+	@Override
+	public void storeUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
 }

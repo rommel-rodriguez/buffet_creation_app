@@ -13,18 +13,27 @@ import java.util.List;
 /*
  * 
  */
-public class InsumoDao implements ollitaPeCRUD{
+// public class InsumoDao implements ollitaPeCRUD{
+
+public class InsumoDao implements InsumoDAOI{
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
+    
+    public InsumoDao () {
+    	
+    }
+    public InsumoDao (Connection con) {
+    	this.con = con;
+    }
 
-    public Insumo listarId(int cod) {
+    public Insumo showInsumo(int cod) {
         Insumo ins = new Insumo();
         String sql = "select * from insumo where idInsumo=" + cod;
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -49,11 +58,11 @@ public class InsumoDao implements ollitaPeCRUD{
     }
     
     @Override
-    public List listar() {
+    public List<Insumo> listInsumos () {
         String sql = "SELECT idInsumo, nombreInsumo,categoria.nombre, medida.nombre, precio FROM insumo INNER JOIN categoria ON insumo.idCategoria = categoria.idCategoria INNER JOIN medida ON insumo.idMedida = medida.idmedida ORDER BY idInsumo";
         List<Insumo> lista = new ArrayList<>();
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -80,15 +89,15 @@ public class InsumoDao implements ollitaPeCRUD{
     }
 
     @Override
-    public int agregar(Object[] o) {
+    public void createInsumo(Insumo o) {
         String sql = "insert into insumo(nombreInsumo, idCategoria, idMedida, precio)values(?,?,?,?)";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
-            ps.setObject(2, o[1]);
-            ps.setObject(3, o[2]);
-            ps.setObject(4, o[3]);
+            ps.setObject(1, o.getNom());
+            ps.setObject(2, o.getCategoria());
+            ps.setObject(3, o.getMedida());
+            ps.setObject(4, o.getPrecio());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -101,20 +110,20 @@ public class InsumoDao implements ollitaPeCRUD{
                 }
             }
         }
-        return r;
     }
 
     @Override
-    public int actualizar(Object[] o) {
+    public void updateInsumo (Insumo ins) {
         String sql = "update insumo set nombreInsumo=?, idCategoria=?, idMedida=?, precio=? where idInsumo=?";
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
-            ps.setObject(2, o[1]);
-            ps.setObject(3, o[2]);
-            ps.setObject(4, o[3]);
-            ps.setObject(5, o[4]);
+            ps.setObject(1, ins.getNom());
+            ps.setObject(2, ins.getCategoria());
+            ps.setObject(3, ins.getMedida());
+            ps.setObject(4, ins.getPrecio());
+            ps.setObject(5, ins.getCod());
+
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
@@ -127,11 +136,10 @@ public class InsumoDao implements ollitaPeCRUD{
                 }
             }
         }
-        return r;
     }
 
     @Override
-    public void eliminar(int cod) {
+    public void deleteInsumo(int cod) {
         String sql = "delete from insumo where idInsumo=" + cod;
         try {
             con = cn.getDBConnection();
@@ -149,4 +157,10 @@ public class InsumoDao implements ollitaPeCRUD{
             }
         }
     }
+
+	@Override
+	public void storeInsumo(Insumo insumo) {
+		// TODO Auto-generated method stub
+		
+	}
 }

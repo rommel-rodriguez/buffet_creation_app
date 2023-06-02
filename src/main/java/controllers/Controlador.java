@@ -149,7 +149,7 @@ public class Controlador extends HttpServlet {
         
         if (menu.equals("Insumos")) {
             if (accion.equals("Listar")) {
-                List listaInsumos = insdao.listar();
+                List<Insumo> listaInsumos = insdao.listInsumos();
                 List listaMedidas = medao.listar();
                 List listaCategorias = null;
 //                List listaCategorias = catdao.listar();
@@ -164,19 +164,19 @@ public class Controlador extends HttpServlet {
                         int categ = Integer.parseInt(request.getParameter("cboCategoria"));
                         int med = Integer.parseInt(request.getParameter("cboMedida"));
                         double prec = Double.parseDouble(request.getParameter("txtprecio"));
-                        Object[] obIns = new Object[4];
-                        obIns[0] = nom;
-                        obIns[1] = categ;
-                        obIns[2] = med;
-                        obIns[3] = prec;
-                        insdao.agregar(obIns);
+//                        Object[] obIns = new Object[4];
+						Insumo ins = new Insumo(); 
+                        ins.setNom(nom);
+                        ins.setCodCat(categ);
+                        ins.setPrecio(prec);
+                        insdao.createInsumo(ins);
                         flag = "INS";
                         request.setAttribute("flag", flag);
                         request.getRequestDispatcher("Controlador?menu=Insumos&accion=Listar").forward(request, response);
                         break;
                     case "Editar":
                         int idInsEdit = Integer.parseInt(request.getParameter("cod"));
-                        Insumo insEditar = insdao.listarId(idInsEdit);
+                        Insumo insEditar = insdao.showInsumo(idInsEdit);
                         request.setAttribute("insumo", insEditar);
                         request.getRequestDispatcher("Controlador?menu=Insumos&accion=Listar").forward(request, response);
                         break;
@@ -186,18 +186,17 @@ public class Controlador extends HttpServlet {
                         int medUp = Integer.parseInt(request.getParameter("cboMedida"));
                         double precUp = Double.parseDouble(request.getParameter("txtprecio"));
                         String codUp = request.getParameter("txtCod");
-                        Object[] obInsUp = new Object[5];
-                        obInsUp[0] = nomUp;
-                        obInsUp[1] = categUp;
-                        obInsUp[2] = medUp;
-                        obInsUp[3] = precUp;
-                        obInsUp[4] = codUp;
-                        insdao.actualizar(obInsUp);
+						Insumo insUp = new Insumo(); 
+                        insUp.setNom(nomUp);
+                        insUp.setCodCat(categUp);
+                        insUp.setPrecio(precUp);
+                        insUp.setCod(Integer.parseInt(codUp));
+                        insdao.updateInsumo(insUp);
                         request.getRequestDispatcher("Controlador?menu=Insumos&accion=Listar").forward(request, response);
                         break;
                     case "Eliminar":
                         int idProElim = Integer.parseInt(request.getParameter("cod"));
-                        insdao.eliminar(idProElim);
+                        insdao.deleteInsumo(idProElim);
                         request.getRequestDispatcher("Controlador?menu=Insumos&accion=Listar").forward(request, response);
                         break;
                     default:
