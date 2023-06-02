@@ -75,7 +75,57 @@ public class InsumoController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		Conexion conFactory = new Conexion();
+        Connection con;
+		con = conFactory.getDBConnection();
+		InsumoDAOI insDao = new InsumoDao(con); 
+		String accion = request.getParameter("accion");
+
+        switch (accion) {
+			case "AgregarInsumo" :
+				String nom = request.getParameter("txtnom");
+				int categ = Integer.parseInt(request.getParameter("cboCategoria"));
+				int med = Integer.parseInt(request.getParameter("cboMedida"));
+				double prec = Double.parseDouble(request.getParameter("txtprecio"));
+				Insumo ins = new Insumo(); 
+				ins.setNom(nom);
+				ins.setCodCat(categ);
+				ins.setPrecio(prec);
+				insDao.createInsumo(ins);
+				doGet(request, response);
+				break;
+			case "EditarInsumo":
+				int idInsEdit = Integer.parseInt(request.getParameter("cod"));
+				Insumo insEditar = insDao.showInsumo(idInsEdit);
+				request.setAttribute("insumo", insEditar);
+				doGet(request, response);
+				break;
+            case "ActualizarInsumo":
+            	
+				String nomUp = request.getParameter("txtnom");
+				int categUp = Integer.parseInt(request.getParameter("cboCategoria"));
+				int medUp = Integer.parseInt(request.getParameter("cboMedida"));
+				double precUp = Double.parseDouble(request.getParameter("txtprecio"));
+				String codUp = request.getParameter("txtCod");
+				Insumo insUp = new Insumo(); 
+				insUp.setNom(nomUp);
+				insUp.setCodCat(categUp);
+				insUp.setPrecio(precUp);
+				insUp.setCod(Integer.parseInt(codUp));
+				insDao.updateInsumo(insUp);
+				doGet(request, response);
+				break;
+            case "EliminarInsumo":
+            	
+				int idProElim = Integer.parseInt(request.getParameter("cod"));
+				insDao.deleteInsumo(idProElim);
+				doGet(request, response);
+
+				break;
+			default:
+				Exception e;
+				break;
+        }
 	}
 
 }

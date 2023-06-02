@@ -113,44 +113,27 @@ public class CategoriaDAO implements CategoriaDAOI{
     public void updateCategoria(Categoria categoria) {
         String sql = "update categoria set nombre=? where idCategoria=?";
         try {
-//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-//            ps.setObject(1, o[0]);
-//            ps.setObject(2, o[1]);
             ps.setString(1, categoria.getNom());
             ps.setInt(2, categoria.getCod());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
         return;
     }
 
     @Override
     public void deleteCategoria(int cod) {
+    	// TODO: Instead of catching the exception, I think its better to let
+    	// it propagate upstream and let the controller handle it in the same
+    	// way it handles the databse connection.
         String sql = "delete from categoria where idCategoria=" + cod;
         try {
-//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
     }
 	@Override

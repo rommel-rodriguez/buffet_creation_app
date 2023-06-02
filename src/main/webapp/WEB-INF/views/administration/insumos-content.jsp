@@ -94,8 +94,19 @@
                                                     <td>${ins.getMedida()}</th>
                                                     <td><sup>S/ </sup>${ins.getPrecio()}</th>
                                                     <td>
+                                                    <!-- 
                                                         <a class="btn btn-sm btn-primary btn-circle" href="Controlador?menu=Insumos&accion=Editar&cod=${ins.getCod()}"><i class=" fas fa-edit"></i></a>
                                                         <a class="btn btn-sm btn-danger btn-circle" href="Controlador?menu=Insumos&accion=Eliminar&cod=${ins.getCod()}"><i class="fas fa-trash-alt"></i></a>
+                                                     -->
+																											<form id="in_table_form" action="${rootPath}/insumos/" method="POST">
+																												<%--
+																												<a class="btn btn-sm btn-primary btn-circle" href="${rootPath}/categorias/?accion=EditarInsumo&cod=${categ.getCod()}"><i class=" fas "></i></a>
+																												<a class="btn btn-sm btn-danger btn-circle" href="Controlador?menu=Insumos&accion=EliminarInsumo&cod=${categ.getCod()}"><i class="fas fa-trash-alt"></i></a>
+																												 --%>
+																												<input type="hidden" value="${ins.getCod()}" name="cod" readonly="true">
+																												<button type="submit" name="accion" value="EditarInsumo" class="btn btn-sm btn-primary btn-circle" ><i class="fas fa-edit"></i> </button>
+																												<button type="submit" name="accion" value="EliminarInsumo" class="btn btn-sm btn-danger btn-circle" ><i class="fas fa-trash-alt"></i></button>
+																											</form>
                                                     </td>
                                                 </tr> 
                                             </c:forEach>

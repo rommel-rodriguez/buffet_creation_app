@@ -83,10 +83,6 @@ public class CategoriaController extends HttpServlet {
 				objCat.setNom(nomCategoria);
 				
 				catDao.createCategoria(objCat);
-//				flag = "CAT";
-//				request.setAttribute("flag", flag);
-//				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
-//				request.getRequestDispatcher(categoriasView).forward(request, response);
 				doGet(request, response);
 				break;
 			case "EditarCategoria":
@@ -99,16 +95,16 @@ public class CategoriaController extends HttpServlet {
             case "ActualizarCategoria":
 				String categoriaUp = request.getParameter("txtCategoria");
 				int codCatUp = Integer.parseInt(request.getParameter("txtCod"));
-//				Object[] obCatUp = new Object[2];
 				Categoria obCatUp = new Categoria();
 				obCatUp.setCod(codCatUp);
 				obCatUp.setNom(categoriaUp);
-//				obCatUp[0] = categoriaUp;
-//				obCatUp[1] = codCatUp;
-//				catDao.(obCatUp);
 				catDao.updateCategoria(obCatUp);
 				doGet(request, response);
-//				request.getRequestDispatcher("Controlador?menu=Categorias&accion=Listar").forward(request, response);
+				break;
+            case "EliminarCategoria":
+				int idCatElim = Integer.parseInt(request.getParameter("cod"));
+				catDao.deleteCategoria(idCatElim);
+				doGet(request, response);
 				break;
 			default:
 				Exception e;

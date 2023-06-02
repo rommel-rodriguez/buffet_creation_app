@@ -42,8 +42,19 @@
                                                         <td>${comid.getCod()}</th>
                                                         <td>${comid.getNom()}</td>
                                                         <td>
+                                                        <!-- 
                                                             <a class="btn btn-sm btn-primary btn-circle" href="Controlador?menu=Comidas&accion=EditarComida&cod=${comid.getCod()}"><i class=" fas fa-edit"></i></a>
                                                             <a class="btn btn-sm btn-danger btn-circle" href="Controlador?menu=Comidas&accion=EliminarComida&cod=${comid.getCod()}"><i class="fas fa-trash-alt"></i></a>
+                                                         -->
+																														<form id="in_table_form" action="${rootPath}/comidas/" method="POST">
+																															<%--
+																															<a class="btn btn-sm btn-primary btn-circle" href="${rootPath}/categorias/?accion=EditarComida&cod=${categ.getCod()}"><i class=" fas "></i></a>
+																															<a class="btn btn-sm btn-danger btn-circle" href="Controlador?menu=Comidas&accion=EliminarComida&cod=${categ.getCod()}"><i class="fas fa-trash-alt"></i></a>
+																															 --%>
+																															<input type="hidden" value="${comid.getCod()}" name="cod" readonly="true">
+																															<button type="submit" name="accion" value="EditarComida" class="btn btn-sm btn-primary btn-circle" ><i class="fas fa-edit"></i> </button>
+																															<button type="submit" name="accion" value="EliminarComida" class="btn btn-sm btn-danger btn-circle" ><i class="fas fa-trash-alt"></i></button>
+																														</form>
                                                         </td>
                                                     </tr> 
                                                 </c:forEach>
