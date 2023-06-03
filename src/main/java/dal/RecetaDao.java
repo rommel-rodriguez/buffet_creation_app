@@ -70,8 +70,10 @@ public class RecetaDao implements RecetaDAOI{
     @Override
     public void createReceta(Receta rec) {
         String sql = "insert into cabreceta(nombre, idUsuario, tipo, foto, link, estado)values(?,?,?,?,?,?)";
+        System.err.println("Inside RecetaDao createReceta");
+        System.err.println("Receta to be created: " + rec.toString());
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, rec.getNombre());
             ps.setObject(2, rec.getIdUsuario());
@@ -89,7 +91,7 @@ public class RecetaDao implements RecetaDAOI{
     public void updateReceta(Receta rec) {
         String sql = "update cabreceta set nombre=?, idUsuario=?, tipo=?, foto=?, link=?, estado=? where idcabreceta=?";
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, rec.getNombre());
             ps.setObject(2, rec.getIdUsuario());

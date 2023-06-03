@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 // import dal.UsuarioDAO;
 import jakarta.servlet.ServletException;
@@ -86,14 +87,14 @@ public class RecetaController extends HttpServlet {
         switch (accion) {
 			case "Agregar" :
 				String nom = request.getParameter("txtnom");
-				String usuario = request.getParameter("txtuser");
+				int usuario = Integer.parseInt(request.getParameter("txtuser"));
 				int comida = Integer.parseInt(request.getParameter("cboComidas"));
 				String foto = request.getParameter("txtfoto");
 				String link = request.getParameter("txtlink");
 				String estado = request.getParameter("cboEstado");
 
 				rec.setNombre(nom);
-				rec.setUsuario(usuario);
+				rec.setIdUsuario(usuario);
 				rec.setIdTipoComida(comida);
 				rec.setFoto(foto);
 				rec.setLinkReceta(link);
@@ -145,6 +146,13 @@ public class RecetaController extends HttpServlet {
 				Exception e;
 				break;
         }
+		if (con != null) {
+			try {
+				con.close();
+			} catch (SQLException ex) {
+				System.err.println( ex);    
+			}
+		}
 	}
 
 }

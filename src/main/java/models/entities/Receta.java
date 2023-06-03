@@ -97,4 +97,13 @@ public class Receta {
         this.Estado = Estado;
     }
 
+	@Override
+	public String toString() {
+		return "Receta [idReceta=" + idReceta + ", Nombre=" + Nombre + ", idUsuario=" + idUsuario + ", Usuario="
+				+ Usuario + ", idTipoComida=" + idTipoComida + ", TipoComida=" + TipoComida + ", Foto=" + Foto
+				+ ", LinkReceta=" + LinkReceta + ", Estado=" + Estado + "]";
+	}
+    
+    
+
 }
