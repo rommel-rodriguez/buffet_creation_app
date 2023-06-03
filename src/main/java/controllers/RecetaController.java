@@ -11,10 +11,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.entities.Comida;
 import models.entities.Receta;
 // import models.entities.Usuario;
 import dal.RecetaDAOI;
 import dal.RecetaDao;
+import dal.ComidaDao;
+import dal.ComidaDAOI;
 import dal.Conexion;
 import utils.tools.AppPath;
 
@@ -47,10 +50,13 @@ public class RecetaController extends HttpServlet {
         Connection con;
 		con = conFactory.getDBConnection();
 		RecetaDAOI recDao = new RecetaDao(con); 
+		ComidaDAOI comDao = new ComidaDao(con); 
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Hitting this endpoint");
 		List<Receta> listaRecetas = recDao.listRecetas();
+		List<Comida> listaComidas = comDao.listComidas();
 		request.setAttribute("recetas", listaRecetas);
+		request.setAttribute("comidas", listaComidas);
 //		request.getRequestDispatcher("Vista/Mantenimiento/Recetas.jsp").forward(request, response);
 		System.out.printf("This is recetasView's Path: %s\n", recetasView);
 		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());

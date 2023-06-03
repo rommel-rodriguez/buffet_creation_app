@@ -68,7 +68,7 @@ public class UsuarioController extends HttpServlet {
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
-		UsuarioDAOI catDao = new UsuarioDAO(con); 
+		UsuarioDAOI userDao = new UsuarioDAO(con); 
 		String accion = request.getParameter("accion");
 //		System.out.printf(
 //				"Usuarios PostMethod: accion=%s\n",
@@ -77,12 +77,20 @@ public class UsuarioController extends HttpServlet {
 
 //
         switch (accion) {
-			case "AgregarUsuario" :
-				String nomUsuario = request.getParameter("txtUsuario");
+			case "Agregar" :
+				String nomUsuario = request.getParameter("txtnom");
+				String foto= request.getParameter("txtfoto");
+				String clave = request.getParameter("txtclave");
+				String tipoUsuario = request.getParameter("cboTipoUsuario");
+				String estado = request.getParameter("cboEstado");
 				Usuario objCat = new Usuario(); 
 				objCat.setNombreUsuario(nomUsuario);
+				objCat.setClave(clave);
+				objCat.setFoto(foto);
+				objCat.setTipoUsuario(tipoUsuario);
+				objCat.setEstado(estado);
 				
-				catDao.createUsuario(objCat);
+				userDao.createUsuario(objCat);
 //				flag = "CAT";
 //				request.setAttribute("flag", flag);
 //				request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);
@@ -91,24 +99,39 @@ public class UsuarioController extends HttpServlet {
 				break;
 			case "EditarUsuario":
 				int idCatEdit = Integer.parseInt(request.getParameter("cod"));
-				Usuario catEditar = catDao.showUsuario(idCatEdit);
+				Usuario catEditar = userDao.showUsuario(idCatEdit);
 				request.setAttribute("usuario", catEditar);
-//				request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);
+
 				doGet(request, response);
 				break;
-            case "ActualizarUsuario":
-				String usuarioUp = request.getParameter("txtUsuario");
+            case "Actualizar":
+            	
+				String usuarioUp = request.getParameter("txtnom");
 				int codCatUp = Integer.parseInt(request.getParameter("txtCod"));
-//				Object[] obCatUp = new Object[2];
+				String fotoUp= request.getParameter("txtfoto");
+				String claveUp = request.getParameter("txtclave");
+				String tipoUsuarioUp = request.getParameter("cboTipoUsuario");
+				String estadoUp = request.getParameter("cboEstado");
+
 				Usuario obUsuarioUp = new Usuario();
+
 				obUsuarioUp.setIdUsuario(codCatUp);
 				obUsuarioUp.setNombreUsuario(usuarioUp);
-//				obCatUp[0] = usuarioUp;
-//				obCatUp[1] = codCatUp;
-//				catDao.(obCatUp);
-				catDao.updateUsuario(obUsuarioUp);
+				obUsuarioUp.setClave(claveUp);
+				obUsuarioUp.setFoto(fotoUp);
+				obUsuarioUp.setTipoUsuario(tipoUsuarioUp);
+				obUsuarioUp.setEstado(estadoUp);
+
+				userDao.updateUsuario(obUsuarioUp);
+
 				doGet(request, response);
-//				request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);
+				break;
+            case "EliminarUsuario":
+				int idUserElim = Integer.parseInt(request.getParameter("cod"));
+
+				userDao.deleteUsuario(idUserElim);
+
+				doGet(request, response);
 				break;
 			default:
 				Exception e;

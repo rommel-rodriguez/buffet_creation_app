@@ -26,7 +26,7 @@ public class Controlador extends HttpServlet {
 	Connection con = conFactory.getDBConnection();
 	CategoriaDAOI catDao = new CategoriaDAO(con); 
     Comida com = new Comida();
-    ComidaDao comdao = new ComidaDao();
+//    ComidaDao comdao = new ComidaDao();
     Medida medida = new Medida();
     MedidaDao medao = new MedidaDao();
     Insumo insumo = new Insumo();
@@ -107,44 +107,45 @@ public class Controlador extends HttpServlet {
         }
         
         if (menu.equals("Comidas")) {
-            if (accion.equals("Listar")) {
-            	;
-            } else {
-                switch (accion) {
-                    case "AgregarComida":
-                        String comida = request.getParameter("txtComida");
-                        Object[] obCom = new Object[1];
-                        obCom[0] = comida;
-                        comdao.agregar(obCom);
-                        flag = "COM";
-                        request.setAttribute("flag", flag);
-                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
-                        break;
-                    case "EditarComida":
-                        int idComEdit = Integer.parseInt(request.getParameter("cod"));
-                        Comida comEditar = comdao.listarId(idComEdit);
-                        request.setAttribute("comida", comEditar);
-                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
-                        break;
-                    case "ActualizarComida":
-                        String comidaUp = request.getParameter("txtComida");
-                        String codComUp = request.getParameter("txtCod");
-                        Object[] obComUp = new Object[2];
-                        obComUp[0] = comidaUp;
-                        obComUp[1] = codComUp;
-                        comdao.actualizar(obComUp);
-                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
-                        break;
-                    case "EliminarComida":
-                        int idCatElim = Integer.parseInt(request.getParameter("cod"));
-                        comdao.eliminar(idCatElim);
-                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        Exception e;
-                        break;
-                }
-            }
+        	;
+//            if (accion.equals("Listar")) {
+//            	;
+//            } else {
+//                switch (accion) {
+//                    case "AgregarComida":
+//                        String comida = request.getParameter("txtComida");
+//                        Object[] obCom = new Object[1];
+//                        obCom[0] = comida;
+//                        comdao.agregar(obCom);
+//                        flag = "COM";
+//                        request.setAttribute("flag", flag);
+//                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
+//                        break;
+//                    case "EditarComida":
+//                        int idComEdit = Integer.parseInt(request.getParameter("cod"));
+//                        Comida comEditar = comdao.listarId(idComEdit);
+//                        request.setAttribute("comida", comEditar);
+//                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
+//                        break;
+//                    case "ActualizarComida":
+//                        String comidaUp = request.getParameter("txtComida");
+//                        String codComUp = request.getParameter("txtCod");
+//                        Object[] obComUp = new Object[2];
+//                        obComUp[0] = comidaUp;
+//                        obComUp[1] = codComUp;
+//                        comdao.actualizar(obComUp);
+//                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
+//                        break;
+//                    case "EliminarComida":
+//                        int idCatElim = Integer.parseInt(request.getParameter("cod"));
+//                        comdao.eliminar(idCatElim);
+//                        request.getRequestDispatcher("Controlador?menu=Comidas&accion=Listar").forward(request, response);
+//                        break;
+//                    default:
+//                        Exception e;
+//                        break;
+//                }
+//            }
         }
         
         if (menu.equals("Insumos")) {

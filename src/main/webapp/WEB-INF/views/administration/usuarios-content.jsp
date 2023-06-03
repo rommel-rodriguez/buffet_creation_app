@@ -22,7 +22,7 @@
                                     <h4><i class="fas fa-carrot"></i> Mantenimiento de Usuarios</h4>
                                     <hr class="mb-4">
                                     <% Usuario usuario = (Usuario) request.getAttribute("usuario");%>
-                                    <form class="needs-validation" id="frmUsuario" action="Controlador?menu=Usuario" method="POST">
+                                    <form class="needs-validation" id="frmUsuario" action="${rootPath}/usuarios/" method="POST">
                                         <input type="hidden" value="${usuario.getIdUsuario()}" id="txtCod" name="txtCod" readonly="true">
                                         <div class="row">
                                             <div class="col-md-2 mb-3">

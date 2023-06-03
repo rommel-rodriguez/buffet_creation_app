@@ -50,7 +50,7 @@
                                                 <input type="text" class="form-control" value="${receta.getFoto()}" name="txtfoto" id="txtfoto" placeholder="Seleccionar foto" required>
                                             </div>
                                             <div class="col-md-2 mb-3">
-                                                <input type="text" class="form-control" value="${receta.getLink()}" name="txtlink" id="txtlink" placeholder="Ingrese Link" required>
+                                                <input type="text" class="form-control" value="${receta.getLinkReceta()}" name="txtlink" id="txtlink" placeholder="Ingrese Link" required>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                             <select class="form-select" name="cboEstado" id="cboEstado" required>
@@ -87,18 +87,32 @@
                                         <tbody class="text-center text-muted">
                                             <c:forEach var="receta" items="${recetas}">
                                                 <tr>
-                                                    <td>${receta.getIdReceta()}</th>
+                                                    <td>${receta.getIdReceta()}</td>
                                                     <td>${receta.getNombre()}</td>
                                                     <td>${receta.getUsuario()}</th>
-                                                    <td>${receta.getTipoComida()}</th>
-                                                    <td>${receta.getFoto()}</th>
-                                                    <td>${receta.getLinkReceta()}</th>
-                                                    <td>${receta.getEstado()}</th>
+                                                    <td>${receta.getTipoComida()}</td>
+                                                    <td>${receta.getFoto()}</td>
+                                                    <td>${receta.getLinkReceta()}</td>
+                                                    <td>${receta.getEstado()}</td>
+                                                    <!--
                                                     <td>
                                                         <a class="btn btn-sm btn-primary btn-circle" href="${rootPath}/recetas/?accion=AgregarIngredientes&cod=${receta.getIdReceta()}"><i class="fas fa-add"></i></a>
                                                         <a class="btn btn-sm btn-primary btn-circle" href="${rootPath}/recetas/?accion=Editar&cod=${receta.getIdReceta()}"><i class=" fas fa-edit"></i></a>
                                                         <a class="btn btn-sm btn-danger btn-circle" href="${rootPath}/recetas/?accion=Eliminar&cod=${receta.getIdReceta()}"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
+                                                      -->
+                                                     <td>
+																											<form id="in_table_form" action="${rootPath}/recetas/" method="POST">
+																												<%--
+																												<a class="btn btn-sm btn-primary btn-circle" href="${rootPath}/categorias/?accion=EditarInsumo&cod=${categ.getCod()}"><i class=" fas "></i></a>
+																												<a class="btn btn-sm btn-danger btn-circle" href="Controlador?menu=Insumos&accion=EliminarInsumo&cod=${categ.getCod()}"><i class="fas fa-trash-alt"></i></a>
+																												 --%>
+																												<input type="hidden" value="${receta.getIdReceta()}" name="cod" readonly="true">
+																												<button type="submit" name="accion" value="Editar" class="btn btn-sm btn-primary btn-circle" ><i class="fas fa-edit"></i> </button>
+																												<button type="submit" name="accion" value="Eliminar" class="btn btn-sm btn-danger btn-circle" ><i class="fas fa-trash-alt"></i></button>
+																											</form>
+                                                     </td>
+																										
                                                 </tr> 
                                             </c:forEach>
                                         </tbody>
