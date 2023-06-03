@@ -15,7 +15,7 @@ request.setAttribute("rootPath", rootPath);
     <ul class="list-unstyled components">
         <p>Bienvenido</p>
         <li class="mb-1">
-            <a href="Controlador?menu=Home" class="link-light active" id="dashboard"> <i class="fas fa-home"></i><span class="nav_name"> Home</span> </a>
+            <a href="${rootPath}/" class="link-light active" id="dashboard"> <i class="fas fa-home"></i><span class="nav_name"> Home</span> </a>
         </li>
         <p>Operaciones</p>
         <li class="mb-1">
@@ -58,7 +58,7 @@ request.setAttribute("rootPath", rootPath);
                 </li>
                 <li>
                     <!-- <a href="Controlador?menu=Recetas&accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Recetas</span> </a> -->
-                    <a href="Controlador?menu=Recetas&accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Recetas</span> </a>
+                    <a href="${rootPath}/recetas/?accion=Listar" class="link-light"> <i class="fas fa-users"></i> <span class="nav_name">Recetas</span> </a>
                 </li>
             </ul>
         </li>

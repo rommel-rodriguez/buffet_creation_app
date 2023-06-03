@@ -14,12 +14,12 @@ public class Conexion {
     // String url = "jdbc:mysql://localhost:3306/ollitape";
     // TODO: Make this environment dependent
     DBConfiguration dbConfig = new DBConfiguration();
-    String url = "jdbc:mysql://db:3306/ollitape";
-    String user = "root";
+//    String url = "jdbc:mysql://db:3306/ollitape";
+//    String user = "root";
     // String user = "devuser";
     // String pass = "12345";
-    String pass = "thisisnotsafe";
-    String driverClassName = "com.mysql.jdbc.Driver";
+//    String pass = "thisisnotsafe";
+//    String driverClassName = "com.mysql.jdbc.Driver";
 
     
     //AMBIENTE PRD

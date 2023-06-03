@@ -32,7 +32,7 @@ public class Controlador extends HttpServlet {
     Insumo insumo = new Insumo();
     InsumoDao insdao = new InsumoDao();
     Receta receta = new Receta();
-    RecetaDao rectdao = new RecetaDao();
+//    RecetaDao rectdao = new RecetaDao();
     Usuario usuario = new Usuario();
 //    UsuarioDAO userdao = new UsuarioDAO();
     static final double igv = 0.18;
@@ -207,66 +207,68 @@ public class Controlador extends HttpServlet {
         }
         
         if (menu.equals("Recetas")) {
-            if (accion.equals("Listar")) {
-                List listaReceta = rectdao.listar();
-                List listaComidas = comdao.listar();
-                request.setAttribute("receta", listaReceta);
-                request.setAttribute("comidas", listaComidas);
-                request.getRequestDispatcher("Vista/Mantenimiento/Receta.jsp").forward(request, response);
-            } else {
-                switch (accion) {
-                    case "Agregar":
-                        String nom = request.getParameter("txtnom");
-                        String usuario = request.getParameter("txtuser");
-                        int comida = Integer.parseInt(request.getParameter("cboComidas"));
-                        String foto = request.getParameter("txtfoto");
-                        String link = request.getParameter("txtlink");
-                        String estado = request.getParameter("cboEstado");
-                        Object[] obRect = new Object[6];
-                        obRect[0] = nom;
-                        obRect[1] = usuario;
-                        obRect[2] = comida;
-                        obRect[3] = foto;
-                        obRect[4] = link;
-                        obRect[5] = estado;
-                        rectdao.agregar(obRect);
-                        flag = "RECT";
-                        request.setAttribute("flag", flag);
-                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
-                        break;
-                    case "Editar":
-                        int idRectEdit = Integer.parseInt(request.getParameter("cod"));
-                        Receta RectEditar = rectdao.listarId(idRectEdit);
-                        request.setAttribute("receta", RectEditar);
-                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
-                        break;
-                    case "Actualizar":
-                        String nomup = request.getParameter("txtnom");
-                        int comidaup = Integer.parseInt(request.getParameter("cboComidas"));
-                        String fotoup = request.getParameter("txtfoto");
-                        String linkup = request.getParameter("txtlink");
-                        int estadoup = Integer.parseInt(request.getParameter("cboEstado"));
-                        String codUp = request.getParameter("txtCod");
-                        Object[] obRectUp = new Object[6];
-                        obRectUp[0] = nomup;
-                        obRectUp[1] = comidaup;
-                        obRectUp[2] = fotoup;
-                        obRectUp[3] = linkup;
-                        obRectUp[3] = estadoup;
-                        obRectUp[4] = codUp;
-                        rectdao.actualizar(obRectUp);
-                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
-                        break;
-                    case "Eliminar":
-                        int idProElim = Integer.parseInt(request.getParameter("cod"));
-                        rectdao.eliminar(idProElim);
-                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        Exception e;
-                        break;
-                }
-            }
+        	;
+//            if (accion.equals("Listar")) {
+//            	;
+//                List listaReceta = rectdao.listar();
+//                List listaComidas = comdao.listar();
+//                request.setAttribute("receta", listaReceta);
+//                request.setAttribute("comidas", listaComidas);
+//                request.getRequestDispatcher("Vista/Mantenimiento/Receta.jsp").forward(request, response);
+//            } else {
+//                switch (accion) {
+//                    case "Agregar":
+//                        String nom = request.getParameter("txtnom");
+//                        String usuario = request.getParameter("txtuser");
+//                        int comida = Integer.parseInt(request.getParameter("cboComidas"));
+//                        String foto = request.getParameter("txtfoto");
+//                        String link = request.getParameter("txtlink");
+//                        String estado = request.getParameter("cboEstado");
+//                        Object[] obRect = new Object[6];
+//                        obRect[0] = nom;
+//                        obRect[1] = usuario;
+//                        obRect[2] = comida;
+//                        obRect[3] = foto;
+//                        obRect[4] = link;
+//                        obRect[5] = estado;
+//                        rectdao.agregar(obRect);
+//                        flag = "RECT";
+//                        request.setAttribute("flag", flag);
+//                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
+//                        break;
+//                    case "Editar":
+//                        int idRectEdit = Integer.parseInt(request.getParameter("cod"));
+//                        Receta RectEditar = rectdao.listarId(idRectEdit);
+//                        request.setAttribute("receta", RectEditar);
+//                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
+//                        break;
+//                    case "Actualizar":
+//                        String nomup = request.getParameter("txtnom");
+//                        int comidaup = Integer.parseInt(request.getParameter("cboComidas"));
+//                        String fotoup = request.getParameter("txtfoto");
+//                        String linkup = request.getParameter("txtlink");
+//                        int estadoup = Integer.parseInt(request.getParameter("cboEstado"));
+//                        String codUp = request.getParameter("txtCod");
+//                        Object[] obRectUp = new Object[6];
+//                        obRectUp[0] = nomup;
+//                        obRectUp[1] = comidaup;
+//                        obRectUp[2] = fotoup;
+//                        obRectUp[3] = linkup;
+//                        obRectUp[3] = estadoup;
+//                        obRectUp[4] = codUp;
+//                        rectdao.actualizar(obRectUp);
+//                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
+//                        break;
+//                    case "Eliminar":
+//                        int idProElim = Integer.parseInt(request.getParameter("cod"));
+//                        rectdao.eliminar(idProElim);
+//                        request.getRequestDispatcher("Controlador?menu=Recetas&accion=Listar").forward(request, response);
+//                        break;
+//                    default:
+//                        Exception e;
+//                        break;
+//                }
+//            }
         }
         
         if (menu.equals("Usuario")) {

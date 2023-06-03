@@ -11,18 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ComidaDao implements ollitaPeCRUD{
+public class ComidaDao implements ComidaDAOI{
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
     
-    public Comida listarId(int cod) {
+    public ComidaDao(Connection con) {
+    	this.con = con;
+    }
+
+    public Comida showComida(int cod) {
         Comida com = new Comida();
         String sql = "select * from  tipocomida where idTipoComida=" + cod;
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -31,23 +35,16 @@ public class ComidaDao implements ollitaPeCRUD{
             }
         } catch (SQLException e) {
             System.err.println( e);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);
-                }
-            }
         }
         return com;
     }
+
    @Override
-    public List listar() {
+    public List<Comida> listComidas() {
         String sql = "select * from  tipocomida order by idTipoComida";
         List<Comida> lista = new ArrayList<>();
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -58,80 +55,53 @@ public class ComidaDao implements ollitaPeCRUD{
             }
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
+
         return lista;
     }
 
     @Override
-    public int agregar(Object[] o) {
+    public void createComida(Comida com) {
         String sql = "insert into tipocomida(nombre)values(?)";
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
+            ps.setObject(1, com.getNom());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
-        return r;
     }
 
     @Override
-    public int actualizar(Object[] o) {
+    public void updateComida(Comida com) {
         String sql = "update tipocomida set nombre=? where idTipoComida=?";
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, o[0]);
-            ps.setObject(2, o[1]);
+            ps.setObject(1, com.getNom());
+            ps.setObject(2, com.getCod());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
-        return r;
     }
 
     @Override
-    public void eliminar(int cod) {
+    public void deleteComida(int cod) {
         String sql = "delete from tipocomida where idTipoComida=" + cod;
         try {
-            con = cn.getDBConnection();
+//            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
     }
+
+	@Override
+	public void storeComida(Comida categoria) {
+		// TODO Auto-generated method stub
+		
+	}
 }
