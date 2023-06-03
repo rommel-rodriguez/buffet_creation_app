@@ -77,4 +77,11 @@ public class Insumo {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+	@Override
+	public String toString() {
+		return "Insumo [cod=" + cod + ", nom=" + nom + ", codCat=" + codCat + ", categoria=" + categoria + ", codMed="
+				+ codMed + ", medida=" + medida + ", precio=" + precio + "]";
+	}
+    
 }

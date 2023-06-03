@@ -34,7 +34,7 @@ public class Controlador extends HttpServlet {
     Receta receta = new Receta();
     RecetaDao rectdao = new RecetaDao();
     Usuario usuario = new Usuario();
-    UsuarioDAO userdao = new UsuarioDAO();
+//    UsuarioDAO userdao = new UsuarioDAO();
     static final double igv = 0.18;
     String numComprobante;
     int codProveedor;
@@ -271,60 +271,62 @@ public class Controlador extends HttpServlet {
         
         if (menu.equals("Usuario")) {
             if (accion.equals("Listar")) {
-                List listaUsuario = userdao.listar();
-                request.setAttribute("usuario", listaUsuario);
-                request.getRequestDispatcher("Vista/Mantenimiento/Usuarios.jsp").forward(request, response);
+            	;
+//                List listaUsuario = userdao.listar();
+//                request.setAttribute("usuario", listaUsuario);
+//                request.getRequestDispatcher("Vista/Mantenimiento/Usuarios.jsp").forward(request, response);
             } else {
-                switch (accion) {
-                    case "Agregar":
-                        String nom = request.getParameter("txtnom");
-                        String clave = request.getParameter("txtclave");
-                        String foto = request.getParameter("txtfoto");
-                        String tipousuario = request.getParameter("cboTipoUsuario");
-                        String estado = request.getParameter("cboEstado");
-                        Object[] obUser = new Object[6];
-                        obUser[0] = nom;
-                        obUser[1] = clave;
-                        obUser[2] = foto;
-                        obUser[3] = tipousuario;
-                        obUser[4] = estado;
-                        userdao.agregar(obUser);
-                        flag = "USER";
-                        request.setAttribute("flag", flag);
-                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
-                        break;
-                    case "Editar":
-                        int idUserEdit = Integer.parseInt(request.getParameter("cod"));
-                        Usuario UserEditar = userdao.listarId(idUserEdit);
-                        request.setAttribute("usuarios", UserEditar);
-                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
-                        break;
-                    case "Actualizar":
-                        String nomup = request.getParameter("txtnom");
-                        String claveup = request.getParameter("txtclave");
-                        String fotoup = request.getParameter("txtfoto");
-                        String tipousuarioup = request.getParameter("cboTipoUsuario");
-                        String estadoup = request.getParameter("cboEstado");
-                        String codUp = request.getParameter("txtCod");
-                        Object[] obUserUp = new Object[6];
-                        obUserUp[0] = nomup;
-                        obUserUp[1] = claveup;
-                        obUserUp[2] = fotoup;
-                        obUserUp[3] = tipousuarioup;
-                        obUserUp[4] = estadoup;
-                        obUserUp[5] = codUp;
-                        userdao.actualizar(obUserUp);
-                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
-                        break;
-                    case "Eliminar":
-                        int idProElim = Integer.parseInt(request.getParameter("cod"));
-                        userdao.eliminar(idProElim);
-                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        Exception e;
-                        break;
-                }
+					;
+//                switch (accion) {
+//                    case "Agregar":
+//                        String nom = request.getParameter("txtnom");
+//                        String clave = request.getParameter("txtclave");
+//                        String foto = request.getParameter("txtfoto");
+//                        String tipousuario = request.getParameter("cboTipoUsuario");
+//                        String estado = request.getParameter("cboEstado");
+//                        Object[] obUser = new Object[6];
+//                        obUser[0] = nom;
+//                        obUser[1] = clave;
+//                        obUser[2] = foto;
+//                        obUser[3] = tipousuario;
+//                        obUser[4] = estado;
+//                        userdao.agregar(obUser);
+//                        flag = "USER";
+//                        request.setAttribute("flag", flag);
+//                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
+//                        break;
+//                    case "Editar":
+//                        int idUserEdit = Integer.parseInt(request.getParameter("cod"));
+//                        Usuario UserEditar = userdao.listarId(idUserEdit);
+//                        request.setAttribute("usuarios", UserEditar);
+//                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
+//                        break;
+//                    case "Actualizar":
+//                        String nomup = request.getParameter("txtnom");
+//                        String claveup = request.getParameter("txtclave");
+//                        String fotoup = request.getParameter("txtfoto");
+//                        String tipousuarioup = request.getParameter("cboTipoUsuario");
+//                        String estadoup = request.getParameter("cboEstado");
+//                        String codUp = request.getParameter("txtCod");
+//                        Object[] obUserUp = new Object[6];
+//                        obUserUp[0] = nomup;
+//                        obUserUp[1] = claveup;
+//                        obUserUp[2] = fotoup;
+//                        obUserUp[3] = tipousuarioup;
+//                        obUserUp[4] = estadoup;
+//                        obUserUp[5] = codUp;
+//                        userdao.actualizar(obUserUp);
+//                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
+//                        break;
+//                    case "Eliminar":
+//                        int idProElim = Integer.parseInt(request.getParameter("cod"));
+//                        userdao.eliminar(idProElim);
+//                        request.getRequestDispatcher("Controlador?menu=Usuario&accion=Listar").forward(request, response);
+//                        break;
+//                    default:
+//                        Exception e;
+//                        break;
+//                }
             }
         }
     }

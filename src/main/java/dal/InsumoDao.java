@@ -45,21 +45,19 @@ public class InsumoDao implements InsumoDAOI{
             }
         } catch (SQLException e) {
             System.err.println( e);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);
-                }
-            }
         }
         return ins;
     }
     
     @Override
     public List<Insumo> listInsumos () {
-        String sql = "SELECT idInsumo, nombreInsumo,categoria.nombre, medida.nombre, precio FROM insumo INNER JOIN categoria ON insumo.idCategoria = categoria.idCategoria INNER JOIN medida ON insumo.idMedida = medida.idmedida ORDER BY idInsumo";
+        String sql =
+          "SELECT idInsumo, nombreInsumo,categoria.nombre, medida.nombre, precio\n"
+        + "FROM insumo\n"
+        + "INNER JOIN categoria ON insumo.idCategoria = categoria.idCategoria\n"
+        + "INNER JOIN medida ON insumo.idMedida = medida.idmedida\n"
+        + "ORDER BY idInsumo";
+
         List<Insumo> lista = new ArrayList<>();
         try {
 //            con = cn.getDBConnection();
@@ -76,15 +74,8 @@ public class InsumoDao implements InsumoDAOI{
             }
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
+
         return lista;
     }
 
@@ -95,46 +86,41 @@ public class InsumoDao implements InsumoDAOI{
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, o.getNom());
-            ps.setObject(2, o.getCategoria());
-            ps.setObject(3, o.getMedida());
+            ps.setObject(2, o.getCodCat());
+            ps.setObject(3, o.getCodMed());
             ps.setObject(4, o.getPrecio());
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
     }
 
     @Override
     public void updateInsumo (Insumo ins) {
+        // String sql = "update insumo set nombreInsumo=?, idCategoria=?, idMedida=?, precio=? where idInsumo=?";
         String sql = "update insumo set nombreInsumo=?, idCategoria=?, idMedida=?, precio=? where idInsumo=?";
+        String nom = ins.getNom();
+		int cat = ins.getCodCat();
+		int med =  ins.getCodMed();
+		double pre = ins.getPrecio();
+		int cod = ins.getCod();
+
+		if (cat == 0 || med == 0)
+			return;
+		
+
         try {
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
-            ps.setObject(1, ins.getNom());
-            ps.setObject(2, ins.getCategoria());
-            ps.setObject(3, ins.getMedida());
-            ps.setObject(4, ins.getPrecio());
-            ps.setObject(5, ins.getCod());
+            ps.setObject(1, nom);
+            ps.setObject(2, cat);
+            ps.setObject(3, med);
+            ps.setObject(4, pre);
+            ps.setObject(5, cod);
 
             r = ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println( e);        
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.err.println( ex);    
-                }
-            }
         }
     }
 

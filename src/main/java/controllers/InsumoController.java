@@ -100,8 +100,7 @@ public class InsumoController extends HttpServlet {
 				request.setAttribute("insumo", insEditar);
 				doGet(request, response);
 				break;
-            case "ActualizarInsumo":
-            	
+            case "Actualizar":
 				String nomUp = request.getParameter("txtnom");
 				int categUp = Integer.parseInt(request.getParameter("cboCategoria"));
 				int medUp = Integer.parseInt(request.getParameter("cboMedida"));
@@ -110,9 +109,16 @@ public class InsumoController extends HttpServlet {
 				Insumo insUp = new Insumo(); 
 				insUp.setNom(nomUp);
 				insUp.setCodCat(categUp);
+				insUp.setCodMed(medUp);
 				insUp.setPrecio(precUp);
 				insUp.setCod(Integer.parseInt(codUp));
 				insDao.updateInsumo(insUp);
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.err.println( e);        
+				}
+            	System.err.println("[INFO] Updating Insumo" + insUp.toString());
 				doGet(request, response);
 				break;
             case "EliminarInsumo":
@@ -125,6 +131,11 @@ public class InsumoController extends HttpServlet {
 			default:
 				Exception e;
 				break;
+        }
+        try {
+        	con.close();
+        } catch (SQLException e) {
+            System.err.println( e);        
         }
 	}
 

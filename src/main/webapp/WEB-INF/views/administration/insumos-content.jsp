@@ -15,7 +15,7 @@
                                     <h4><i class="fas fa-carrot"></i> Mantenimiento de Insumos</h4>
                                     <hr class="mb-4">
                                     <% Insumo insumo = (Insumo) request.getAttribute("insumo");%>
-                                    <form class="needs-validation" id="frmInsumo" action="Controlador?menu=Insumos" method="POST">
+                                    <form class="needs-validation" id="frmInsumo" action="${rootPath}/insumos/" method="POST">
                                         <input type="hidden" value="${insumo.getCod()}" id="txtCod" name="txtCod" readonly="true">
                                         <div class="row">
                                             <div class="col-md-2 mb-3">

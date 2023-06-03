@@ -14,40 +14,41 @@ import models.entities.Usuario;
 @WebServlet(name = "ControladorUsuario", urlPatterns = {"/ControladorUsuario"})
 public class ControladorUsuario extends HttpServlet {
     Usuario Usuario = new Usuario();
-    UsuarioDAO UsuarioDAO = new UsuarioDAO();
+    // UsuarioDAO UsuarioDAO = new UsuarioDAO();
+    UsuarioDAO UsuarioDAO;
     String flag;
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String menu = request.getParameter("menu");
-        String accion = request.getParameter("accion");
-        
-        if (request.getParameter("btnAcceder") != null) {
-            Usuario usu = new Usuario();
-            String user = request.getParameter("nombreUsuario");
-            String clave = request.getParameter("clave");
-            usu.setNombreUsuario(user);
-            usu.setClave(clave);
-            UsuarioDAO login = new UsuarioDAO();
-            String estado;
-            try {
-                estado = login.login(usu);
-                if ("true".equals(estado)) {
-                    HttpSession objSesion = request.getSession();
-                    if (usu.getTipoUsuario().equals("Administrador")) {
-                        objSesion.setAttribute("usuario", user);
-                        objSesion.setAttribute("nivel", "Administrador");
-                        response.sendRedirect("index.jsp");
-                    } else if (usu.getTipoUsuario().equals("Cliente")) {
-                        objSesion.setAttribute("usuario", user);
-                        objSesion.setAttribute("nivel", "Cliente");
-                        response.sendRedirect("index.jsp");
-                    }
-                }
-            } catch (Exception ex) {
-                response.sendRedirect("login_Error.jsp");
-            }
-        }
-    }
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        String menu = request.getParameter("menu");
+//        String accion = request.getParameter("accion");
+//        
+//        if (request.getParameter("btnAcceder") != null) {
+//            Usuario usu = new Usuario();
+//            String user = request.getParameter("nombreUsuario");
+//            String clave = request.getParameter("clave");
+//            usu.setNombreUsuario(user);
+//            usu.setClave(clave);
+//            UsuarioDAO login = new UsuarioDAO();
+//            String estado;
+//            try {
+//                estado = login.login(usu);
+//                if ("true".equals(estado)) {
+//                    HttpSession objSesion = request.getSession();
+//                    if (usu.getTipoUsuario().equals("Administrador")) {
+//                        objSesion.setAttribute("usuario", user);
+//                        objSesion.setAttribute("nivel", "Administrador");
+//                        response.sendRedirect("index.jsp");
+//                    } else if (usu.getTipoUsuario().equals("Cliente")) {
+//                        objSesion.setAttribute("usuario", user);
+//                        objSesion.setAttribute("nivel", "Cliente");
+//                        response.sendRedirect("index.jsp");
+//                    }
+//                }
+//            } catch (Exception ex) {
+//                response.sendRedirect("login_Error.jsp");
+//            }
+//        }
+//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -61,7 +62,7 @@ public class ControladorUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
     }
 
     /**
@@ -75,7 +76,7 @@ public class ControladorUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
     }
 
     /**
