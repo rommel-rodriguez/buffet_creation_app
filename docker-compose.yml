@@ -28,7 +28,37 @@ services:
       - MYSQL_PASSWORD=changeme
       - MYSQL_DATABASE=ollitape
       - MYSQL_ROOT_PASSWORD=thisisnotsafe
+  login:
+    build:
+      context: .
+      dockerfile: Dockefile.login
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=logindb
+      - DB_NAME=devdb
+      - DB_USER=mainapp
+      - DB_PASS=changeme
+    depends_on:
+      - logindb
+  logindb:
+    image: postgres:15.1-alpine
+    volumes:
+      - login-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
 
 
 ## volumes:
 ##   mysql-data:
+volumes:
+  login-db-data:
