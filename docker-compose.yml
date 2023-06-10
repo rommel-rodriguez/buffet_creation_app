@@ -31,13 +31,13 @@ services:
   login:
     build:
       context: .
-      dockerfile: Dockefile.login
+      dockerfile: Dockerfile.login
       args:
         - DEV=true
     ports:
       - "8000:8000"
     volumes:
-      - ./app:/app
+      - ./login_micro:/app
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
