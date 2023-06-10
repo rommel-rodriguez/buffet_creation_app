@@ -41,8 +41,7 @@ RUN rm -rf /tmp
 
 ENV PATH="/py/bin:$PATH"
 
-COPY ./app /app
+COPY ./login_micro /app
 WORKDIR /app
 
 USER django-user
-
