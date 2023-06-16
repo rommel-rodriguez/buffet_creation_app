@@ -37,7 +37,7 @@ public class SignUpController extends HttpServlet {
 	String signupSuccessView = new AppPath()
 			.convertToView("public/login/signup_success.jsp");
 	String signupFailureView = new AppPath()
-			.convertToView("public/login/signup.jsp");
+			.convertToView("public/login/error.jsp");
 	
 	private LoginMicroserviceConfiguration loginConfig =
 			new LoginMicroserviceConfiguration();
@@ -86,10 +86,17 @@ public class SignUpController extends HttpServlet {
 		
 		if (first_password.isEmpty() || second_password.isEmpty()) {
 			// send message to logging error dispatch and return
+			request.setAttribute("errorType", "Sign Up Error");
+			request.setAttribute("errorMessage", "One of the passswords is Empty");
+			getServletContext().getRequestDispatcher(signupFailureView).forward(request, response);
+			return;
 			
 		} else if (! first_password.equals(second_password)) {
 			// send message to logging error dispatch and return
-		getServletContext().getRequestDispatcher(signupSuccessView).forward(request, response);
+			request.setAttribute("errorType", "Sign Up Error");
+			request.setAttribute("errorMessage", "The passwords do not match");
+			getServletContext().getRequestDispatcher(signupFailureView).forward(request, response);
+			return;
 			
 		}
 		// Do I need a LoginDao here?
@@ -99,43 +106,12 @@ public class SignUpController extends HttpServlet {
 		Usuario returnedUser = loginDao.createUser(createdUser);
 		
 		if (returnedUser!= null) {
+			// TODO: I think I should be doing something with the returnedUser
+			// information here.
 			getServletContext().getRequestDispatcher(signupSuccessView).forward(request, response);
+			return;
 		}
-		
 
-//        switch (accion) {
-//			case "AgregarComida" :
-//				String nomComida = request.getParameter("txtComida");
-//				Comida objCat = new Comida(); 
-//				objCat.setNom(nomComida);
-//				
-//				catDao.createComida(objCat);
-//				doGet(request, response);
-//				break;
-//			case "EditarComida":
-//				int idCatEdit = Integer.parseInt(request.getParameter("cod"));
-//				Comida catEditar = catDao.showComida(idCatEdit);
-//				request.setAttribute("comida", catEditar);
-//				doGet(request, response);
-//				break;
-//            case "ActualizarComida":
-//				String comidaUp = request.getParameter("txtComida");
-//				int codCatUp = Integer.parseInt(request.getParameter("txtCod"));
-//				Comida obCatUp = new Comida();
-//				obCatUp.setCod(codCatUp);
-//				obCatUp.setNom(comidaUp);
-//				catDao.updateComida(obCatUp);
-//				doGet(request, response);
-//				break;
-//            case "EliminarComida":
-//				int idCatElim = Integer.parseInt(request.getParameter("cod"));
-//				catDao.deleteComida(idCatElim);
-//				doGet(request, response);
-//				break;
-//			default:
-//				Exception e;
-//				break;
-//        }
 
 	}
 

@@ -44,14 +44,9 @@ public class LoginController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 //        Connection con = (new Conexion()).getDBConnection();
-//		System.out.println("Hitting this endpoint" + request.getContextPath());
-//		ComidaDao comDao = new ComidaDao(con); 
+		System.out.println("Hitting this endpoint" + request.getContextPath());
 //		request.setAttribute("login", listaComidas);
-//		System.out.printf("This is loginView's Path: %s\n", loginView);
-//		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());
-//		System.out.printf("This is the context Path: %s\n", getServletContext().getContextPath());
 		getServletContext().getRequestDispatcher(loginView).forward(request, response);
 	}
 

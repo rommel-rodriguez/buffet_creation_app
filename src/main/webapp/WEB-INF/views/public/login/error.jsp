@@ -1,10 +1,14 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<c:set var = "contextPath" value = "${pageContext.servletContext.contextPath}" /> 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="5;url=${contextPath}/signup" />
     <script
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
@@ -19,9 +23,10 @@
           <form action="ControladorUsuario" method="POST" class="sign-in-form">
             <img src="assets/img/LaOllita_logo.png" class="image2" alt="" />
 
-            <h2 class="title">Ingresar</h2>
+            <h2 class="title"><%= request.getAttribute("errorType") %></h2>
             <p class="social-text">
-              Error en el Inicio de Sesión
+							<%= request.getAttribute("errorMessage") %>
+							You will be redirected in 5 seconds
             </p>
             <a href="login.jsp"><span class="fa fa-user-circle" style="align-content: center"></span>Regresa al Login</a>
           </form>
