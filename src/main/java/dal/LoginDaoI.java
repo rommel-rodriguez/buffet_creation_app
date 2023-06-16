@@ -1,6 +1,6 @@
 package dal;
 
-import models.*;
+import models.entities.*;
 import models.entities.Usuario;
 
 public interface LoginDaoI {

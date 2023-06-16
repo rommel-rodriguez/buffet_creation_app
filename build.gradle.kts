@@ -29,18 +29,16 @@ dependencies {
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
     implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0")
 
+    implementation("com.fasterxml.jackson.core:jackson-core:2.15.2")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.15.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
+
     // implementation("jakarta.faces:jakarta.faces-api:4.0.0")
     // implementation("org.glassfish:jakarta.faces:4.0.2") 
 
     // implementation("jakarta.faces:jakarta.faces-api:3.0.0")
 
 
-    // implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0")
-    // implementation("javax.servlet:jstl:1.2")
-    // implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
-    // compileOnly("jakarta.servlet:jakarta.servlet-api:5.0.0")
-    // implementation("jakarta.servlet:jakarta.servlet-api:4.0.3")
-    // implementation("javax.servlet:javax.servlet-api:4.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8")
     implementation("mysql:mysql-connector-java:8.0.33")
 
