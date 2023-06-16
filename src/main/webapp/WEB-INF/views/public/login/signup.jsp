@@ -1,4 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page import="utils.tools.AppPath" %>
+  
+<c:set var="appPath" value="<%= new utils.tools.AppPath()%>" />
+<c:set var="scriptsPath" value="${appPath.convertToView('templating/Scripts.jsp')}" />
+
+<c:set var = "contextPath" value = "${pageContext.servletContext.contextPath}" /> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,26 +15,35 @@
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="assets/css/login.css" />
-    <title>Formulario de Ingreso y Registro</title>
+    <link rel="stylesheet" href="${contextPath}/assets/css/login.css" />
+    <title>Sign Up</title>
   </head>
   <body>
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="ControladorUsuario" method="POST" class="sign-in-form">
-            <img src="assets/img/LaOllita_logo.png" class="image2" alt="" />
+          <form action="${contextPath}/signup" method="POST" class="sign-in-form">
+            <img src="${contextPath}/assets/img/LaOllita_logo.png" class="image2" alt="" />
 
             <h2 class="title">Ingresar</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Usuario" name="nombreUsuario" />
+              <input type="email" placeholder="Ingresar Email" name="emailUsuario" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Nombre Usuario" name="nombreUsuario" value="Anonymus" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Contraseña" name="clave"/>
+              <input type="password" placeholder="Contraseña" name="clave1"/>
             </div>
-            <input type="submit" value="Iniciar Sesión" class="btn solid" name="btnAcceder"/>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Repetir Contraseña" name="clave2"/>
+            </div>
+            <input type="submit" value="Registrarse" class="btn solid" name="btnAcceder"/>
+            <!-- 
             <p class="social-text">
               O iniciar sesión por medio de una red social
             </p>
@@ -45,10 +61,11 @@
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </div>
+             -->
           </form>
 
           <form action="Controlador?menu=Usuarios" class="sign-up-form">
-            <img src="assets/img/LaOllita_logo.png" class="image2" alt="" />
+            <img src="${contextPath}/assets/img/LaOllita_logo.png" class="image2" alt="" />
 
             <h2 class="title">Registro</h2>
             <div class="input-field">
@@ -64,35 +81,9 @@
         </div>
       </div>
 
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
-            <h3>¿Eres nuevo?</h3>
-            <p>
-              Registrate y comienza a organizar tus recetas y llevar un mejor
-              control de lo que comes y tu presupuesto. ¡Suerte!
-            </p>
-            <button class="btn transparent" id="sign-up-btn">Registro</button>
-          </div>
-          <img src="assets/img/log2.svg" class="image" alt="" />
-        </div>
-        <div class="panel right-panel">
-          <div class="content">
-            <h3>¿Ya tienes una cuenta?</h3>
-            <p>
-              Ingresa y sigue actualizando tus recetas y llevando control de lo
-              que comes y de tu presupuesto. ¡Te extrañamos!
-            </p>
-            <button class="btn transparent" id="sign-in-btn">
-              Inicia Sesión
-            </button>
-          </div>
-          <img src="assets/img/register2.svg" class="image" alt="" />
-        </div>
-      </div>
     </div>
 
-    <script src="assets/js/login.js"></script>
+    <script src="${contextPath}/assets/js/login.js"></script>
   </body>
 </html>
 

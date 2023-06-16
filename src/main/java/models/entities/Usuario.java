@@ -1,6 +1,7 @@
 package models.entities;
 public class Usuario {
     private int idUsuario;
+    String email;
     private String nombreUsuario;
     private String clave;
     private String foto;
@@ -26,8 +27,18 @@ public class Usuario {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+    
 
-    public String getNombreUsuario() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombreUsuario() {
         return nombreUsuario;
     }
 
@@ -66,5 +77,11 @@ public class Usuario {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", email=" + email + ", nombreUsuario=" + nombreUsuario + ", clave="
+				+ clave + ", foto=" + foto + ", tipoUsuario=" + tipoUsuario + ", estado=" + estado + "]";
+	}
 
 }
