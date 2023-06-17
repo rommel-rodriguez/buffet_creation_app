@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<%
+
+		String authToken = null;
+    if (request.getSession().getAttribute("token") != null) {
+			authToken = request.getSession().getAttribute("token").toString();
+			request.setAttribute("authToken", authToken);
+    }
+%>
 <%-- <%@ include file="/WEB-INF/views/templating/base.jsp" %>--%>
 
 	<div class="container-fluid">
+					<h1>Test token: <c:out value="${authToken}" /></h1>
+	   <%--
+					<h1>Test token: <c:out value="${authToken}" /></h1>
+	    --%>
 			<div class="row">
 					<div class="col-md-6 order-md-1">
 									<div class="card border-light my-2 p-1 bg-body rounded shadow-sm">

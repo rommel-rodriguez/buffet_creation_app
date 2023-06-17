@@ -12,11 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.entities.Categoria;
+import models.entities.Usuario;
 // import models.entities.Usuario;
 import dal.CategoriaDAOI;
 import dal.CategoriaDAO;
 import dal.Conexion;
+import dal.LoginDao;
 import utils.tools.AppPath;
+import utils.tools.SessionTool;
 
 /**
  * Servlet implementation class CategoriaController
@@ -27,6 +30,8 @@ public class CategoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String categoriasView = new AppPath()
 			.convertToView("administration/Categorias.jsp");
+	String errorView = new AppPath()
+			.convertToView("administration/error.jsp");
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,6 +48,10 @@ public class CategoriaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
+		Usuario user = getAuthUser(request);
+		if (!restrictNonAuthenticated(user, request, response))
+			return;
+		
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
@@ -65,6 +74,10 @@ public class CategoriaController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
+		Usuario user = getAuthUser(request);
+		if (!restrictNonAuthenticated(user, request, response))
+			return;
+
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
@@ -111,5 +124,40 @@ public class CategoriaController extends HttpServlet {
 				break;
         }
 	}
+	
+	private Usuario getAuthUser(HttpServletRequest request) {
+
+		SessionTool sTool = new SessionTool();
+
+		Usuario user = null;
+
+		user = sTool.authenticate(request);
+
+		return user;
+	}
+	
+	private boolean restrictNonAuthenticated (
+			Usuario user,
+			HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		if (user == null || user.getTipoUsuario() == "Administrador") {
+			request.setAttribute("errorType", "Sitio Restringido");
+			request.setAttribute(
+					"errorMessage",
+					"Lo sentimos, esta pagina esta reservada solo para personal");
+			try {
+				request.getServletContext().getRequestDispatcher(errorView).forward(request, response);
+				return false;
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+				System.out.println("[ERROR] Error while dispatching to Error View");
+			}
+		}
+		request.setAttribute("authUser", user);// Maybe better to set a Hashmap
+		// or static class here
+		return true;
+	}
+
 
 }

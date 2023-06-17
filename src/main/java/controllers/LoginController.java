@@ -15,12 +15,11 @@ import jakarta.servlet.http.HttpSession;
 
 import models.entities.Categoria;
 import models.entities.Comida;
+import models.entities.Usuario;
 // import models.entities.Usuario;
 import dal.Conexion;
-import dal.CategoriaDAOI;
-import dal.CategoriaDAO;
-import dal.ComidaDAOI;
-import dal.ComidaDao;
+import dal.LoginDaoI;
+import dal.LoginDao;
 import utils.tools.AppPath;
 
 /**
@@ -32,14 +31,18 @@ import utils.tools.AppPath;
 		value = {"/login", "/login/"})
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private LoginDaoI loginDao;
 	String loginView = new AppPath()
 			.convertToView("public/login/login.jsp");
+	String loginFailureView = new AppPath()
+			.convertToView("public/login/error.jsp");
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginController() {
         super();
+        this.loginDao = new LoginDao();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,51 +53,46 @@ public class LoginController extends HttpServlet {
 		getServletContext().getRequestDispatcher(loginView).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(
+			HttpServletRequest request, HttpServletResponse response)
+					throws ServletException, IOException {
 		
-		Conexion conFactory = new Conexion();
-        Connection con;
-		con = conFactory.getDBConnection();
-		ComidaDAOI catDao = new ComidaDao(con); 
-		String accion = request.getParameter("accion");
+		String authToken = null;
+		HttpSession session = request.getSession();
+		String email = request.getParameter("email");
+		String password = request.getParameter("clave");
+		Usuario loginUser = new Usuario();
+		loginUser.setEmail(email);
+		loginUser.setClave(password);
+		
+		
+		System.out.printf(
+				"[INFO] User trying to Login:\n%s %s\n",
+				email,
+				password
+				);
+		
+		if (password.isEmpty()) {
+			// send message to logging error dispatch and return
+			request.setAttribute("errorType", "Login Error");
+			request.setAttribute("errorMessage", "The password field is Empty");
+			getServletContext().getRequestDispatcher(loginFailureView).forward(request, response);
+			return;
+			
+		}		// Do I need a LoginDao here?
+		
+		authToken = loginDao.loginUser(loginUser);
+		
+		if (authToken == null) {
+			request.setAttribute("errorType", "Login Error");
+			request.setAttribute("errorMessage", "Null authToken Returned");
+			getServletContext().getRequestDispatcher(loginFailureView).forward(request, response);
+			return;
+		}
+		session.setAttribute("token", authToken);	
+		getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
-        switch (accion) {
-			case "AgregarComida" :
-				String nomComida = request.getParameter("txtComida");
-				Comida objCat = new Comida(); 
-				objCat.setNom(nomComida);
-				
-				catDao.createComida(objCat);
-				doGet(request, response);
-				break;
-			case "EditarComida":
-				int idCatEdit = Integer.parseInt(request.getParameter("cod"));
-				Comida catEditar = catDao.showComida(idCatEdit);
-				request.setAttribute("comida", catEditar);
-				doGet(request, response);
-				break;
-            case "ActualizarComida":
-				String comidaUp = request.getParameter("txtComida");
-				int codCatUp = Integer.parseInt(request.getParameter("txtCod"));
-				Comida obCatUp = new Comida();
-				obCatUp.setCod(codCatUp);
-				obCatUp.setNom(comidaUp);
-				catDao.updateComida(obCatUp);
-				doGet(request, response);
-				break;
-            case "EliminarComida":
-				int idCatElim = Integer.parseInt(request.getParameter("cod"));
-				catDao.deleteComida(idCatElim);
-				doGet(request, response);
-				break;
-			default:
-				Exception e;
-				break;
-        }
-
+		return;
 	}
 
 }

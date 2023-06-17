@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" session="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="utils.tools.AppPath" %>
   
@@ -10,12 +10,14 @@
 
 <c:set var = "contextPath" value = "${pageContext.servletContext.contextPath}" /> 
 
-<%--
-    <%
-        String contextPath = request.getContextPath();
-        String testPath = "this/is/a/test/path"; 
-    %>
---%>
+<%
+
+		String authToken = null;
+    if (request.getSession().getAttribute("token") != null) {
+			authToken = request.getSession().getAttribute("token").toString();
+			request.setAttribute("authToken", authToken);
+    }
+%>
 <%
     String anotherPath = "this/is/another/path"; 
 %>
@@ -33,6 +35,9 @@
                 <%-- <%@ include file='Vista/Genericos/BarraSuperior.jsp' %> --%>
 								<jsp:include page="${barraPath}" />
                 <div class="ollita">
+                <%-- 
+									<h1>Test token: <c:out value="${authToken}" /></h1>
+                --%>
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <div class="card border-light my-2 p-1 bg-body rounded shadow-sm">

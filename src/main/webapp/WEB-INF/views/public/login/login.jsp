@@ -22,13 +22,13 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="ControladorUsuario" method="POST" class="sign-in-form">
+          <form action="${contextPath}/login" method="POST" class="sign-in-form">
             <img src="${contextPath}/assets/img/LaOllita_logo.png" class="image2" alt="" />
 
             <h2 class="title">Ingresar</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Usuario" name="nombreUsuario" />
+              <input type="text" placeholder="Usuario" name="email" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>

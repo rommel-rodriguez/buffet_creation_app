@@ -67,6 +67,7 @@ public class SignUpController extends HttpServlet {
 		
 		Conexion conFactory = new Conexion();
         Connection con;
+        // TODO: Need to replicate user creation in the other database as well...
 		con = conFactory.getDBConnection();
 
 		String email = request.getParameter("emailUsuario");
