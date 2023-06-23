@@ -47,4 +47,36 @@ public class SessionTool {
 		return user;
 	}
 
+	public Usuario authenticateToken(HttpServletRequest request) {
+
+		String authHeader = request.getHeader("Authorization");
+		String authToken = null;
+		Usuario user = null;
+
+		// TODO This might raise an exception in some cases
+		if (authHeader!= null) {
+			String headerParts[] = authHeader.split(" ");
+			if (headerParts.length != 2) {
+				System.err.println("[ERROR] Auth Token has to have 'Token '  at the start");
+				return null;
+			}
+			authToken = headerParts[1];
+		}
+
+			
+		if (authToken == null) {
+			System.err.println("[ERROR] Auth Token is Null");
+			return null;
+		}
+
+		user = loginDao.retrieveUser(authToken);
+
+		if (user == null) {
+			System.err.println("[ERROR] Auth User is Null");
+			return null;
+		}
+		
+		return user;
+	}
+
 }

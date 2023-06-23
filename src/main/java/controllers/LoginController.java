@@ -89,9 +89,21 @@ public class LoginController extends HttpServlet {
 			getServletContext().getRequestDispatcher(loginFailureView).forward(request, response);
 			return;
 		}
-		session.setAttribute("token", authToken);	
-		getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+		// session.setAttribute("token", authToken);	
+		// Trying another token persistence with header 
+		String authHeader = String.format("Bearer %s", authToken);
 
+//        response.setHeader("Authorization", authToken);
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Vary", "Authorization");
+        response.setHeader("Authorization", authHeader);
+        response.setHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
+
+
+        // TODO: We got a problem here. The url does not change to / or /index.jsp
+        // it stays at /login. Better do a post back to login or something
+		getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+//        response.sendRedirect(request.getContextPath());
 		return;
 	}
 

@@ -48,8 +48,9 @@ public class CategoriaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
-		Usuario user = getAuthUser(request);
-		if (!restrictNonAuthenticated(user, request, response))
+//		Usuario user = getAuthUser(request);
+		Usuario user = getAuthUserWithHeader(request);
+		if (!isAnAdministrator(user, request, response))
 			return;
 		
 		Conexion conFactory = new Conexion();
@@ -75,7 +76,7 @@ public class CategoriaController extends HttpServlet {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
 		Usuario user = getAuthUser(request);
-		if (!restrictNonAuthenticated(user, request, response))
+		if (!isAnAdministrator(user, request, response))
 			return;
 
 		Conexion conFactory = new Conexion();
@@ -136,7 +137,18 @@ public class CategoriaController extends HttpServlet {
 		return user;
 	}
 	
-	private boolean restrictNonAuthenticated (
+	private Usuario getAuthUserWithHeader(HttpServletRequest request) {
+
+		SessionTool sTool = new SessionTool();
+
+		Usuario user = null;
+
+		user = sTool.authenticateToken(request);
+
+		return user;
+	}
+
+	private boolean isAnAdministrator (
 			Usuario user,
 			HttpServletRequest request,
 			HttpServletResponse response) {
