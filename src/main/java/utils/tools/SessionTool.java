@@ -54,7 +54,7 @@ public class SessionTool {
 		Usuario user = null;
 
 		// TODO This might raise an exception in some cases
-		if (authHeader!= null) {
+		if (authHeader != null) {
 			String headerParts[] = authHeader.split(" ");
 			if (headerParts.length != 2) {
 				System.err.println("[ERROR] Auth Token has to have 'Token '  at the start");
@@ -77,6 +77,49 @@ public class SessionTool {
 		}
 		
 		return user;
+	}
+	
+	
+	public Usuario getAuthUser(HttpServletRequest request) {
+
+		Usuario user = null;
+
+		user = authenticate(request);
+
+		return user;
+	}
+
+	public Usuario getAuthUserWithHeader(HttpServletRequest request) {
+
+		Usuario user = null;
+
+		user = authenticateToken(request);
+
+		return user;
+	}
+
+	public boolean isAnAdministrator (
+			Usuario user,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			String errorView) {
+		
+		if (user == null || user.getTipoUsuario() == "Administrador") {
+			request.setAttribute("errorType", "Sitio Restringido");
+			request.setAttribute(
+					"errorMessage",
+					"Lo sentimos, esta pagina esta reservada solo para personal");
+			try {
+				request.getServletContext().getRequestDispatcher(errorView).forward(request, response);
+				return false;
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+				System.out.println("[ERROR] Error while dispatching to Error View");
+			}
+		}
+		request.setAttribute("authUser", user);// Maybe better to set a Hashmap
+		// or static class here
+		return true;
 	}
 
 }

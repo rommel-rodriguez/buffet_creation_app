@@ -32,6 +32,7 @@ public class CategoriaController extends HttpServlet {
 			.convertToView("administration/Categorias.jsp");
 	String errorView = new AppPath()
 			.convertToView("administration/error.jsp");
+	SessionTool sessTool = new SessionTool();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,11 +47,10 @@ public class CategoriaController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: Surroung all Connection related code with appropriate try-catch
-		// blocks.
-		Usuario user = getAuthUser(request);
-		// Usuario user = getAuthUserWithHeader(request);
-		if (!isAnAdministrator(user, request, response))
+
+		Usuario user = sessTool.getAuthUser(request);
+
+		if (!sessTool.isAnAdministrator(user, request, response, errorView))
 			return;
 		
 		Conexion conFactory = new Conexion();
