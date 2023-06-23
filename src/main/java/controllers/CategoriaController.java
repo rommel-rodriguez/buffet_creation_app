@@ -48,8 +48,8 @@ public class CategoriaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
-//		Usuario user = getAuthUser(request);
-		Usuario user = getAuthUserWithHeader(request);
+		Usuario user = getAuthUser(request);
+		// Usuario user = getAuthUserWithHeader(request);
 		if (!isAnAdministrator(user, request, response))
 			return;
 		
@@ -69,9 +69,7 @@ public class CategoriaController extends HttpServlet {
 		getServletContext().getRequestDispatcher(categoriasView).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.

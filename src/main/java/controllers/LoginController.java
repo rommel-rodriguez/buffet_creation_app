@@ -89,7 +89,8 @@ public class LoginController extends HttpServlet {
 			getServletContext().getRequestDispatcher(loginFailureView).forward(request, response);
 			return;
 		}
-		// session.setAttribute("token", authToken);	
+
+		session.setAttribute("token", authToken);	
 		// Trying another token persistence with header 
 		String authHeader = String.format("Bearer %s", authToken);
 

@@ -28,7 +28,7 @@
 							<%= request.getAttribute("errorMessage") %>
 							You will be redirected in 5 seconds
             </p>
-            <a href="login.jsp"><span class="fa fa-user-circle" style="align-content: center"></span>Regresa al Login</a>
+            <a href="${contextPath}/login"><span class="fa fa-user-circle" style="align-content: center"></span>Regresa al Login</a>
           </form>
         </div>
       </div>

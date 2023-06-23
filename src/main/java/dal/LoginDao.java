@@ -180,7 +180,7 @@ public class LoginDao implements LoginDaoI {
 			System.out.println("[INFO] JsonNode:\n" + jsonNode);
 			// Access the token value
 			token = jsonNode.get("token").asText();
-            System.out.println("[INFO] Successfully acquiered token: " + token);
+            System.out.println("[INFO] Successfully acquired token: " + token);
 
 			return token;
         } catch (Exception e) {
