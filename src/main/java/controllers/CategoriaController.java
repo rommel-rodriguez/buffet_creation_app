@@ -34,18 +34,11 @@ public class CategoriaController extends HttpServlet {
 			.convertToView("administration/error.jsp");
 	SessionTool sessTool = new SessionTool();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public CategoriaController() {
         super();
         
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Usuario user = sessTool.getAuthUser(request);
@@ -73,8 +66,10 @@ public class CategoriaController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
-		Usuario user = getAuthUser(request);
-		if (!isAnAdministrator(user, request, response))
+
+		Usuario user = sessTool.getAuthUser(request);
+
+		if (!sessTool.isAnAdministrator(user, request, response, errorView))
 			return;
 
 		Conexion conFactory = new Conexion();
@@ -82,12 +77,7 @@ public class CategoriaController extends HttpServlet {
 		con = conFactory.getDBConnection();
 		CategoriaDAOI catDao = new CategoriaDAO(con); 
 		String accion = request.getParameter("accion");
-//		System.out.printf(
-//				"Categorias PostMethod: accion=%s\n",
-//				accion
-//				);
 
-//
         switch (accion) {
 			case "AgregarCategoria" :
 				String nomCategoria = request.getParameter("txtCategoria");
@@ -123,51 +113,5 @@ public class CategoriaController extends HttpServlet {
 				break;
         }
 	}
-	
-	private Usuario getAuthUser(HttpServletRequest request) {
-
-		SessionTool sTool = new SessionTool();
-
-		Usuario user = null;
-
-		user = sTool.authenticate(request);
-
-		return user;
-	}
-	
-	private Usuario getAuthUserWithHeader(HttpServletRequest request) {
-
-		SessionTool sTool = new SessionTool();
-
-		Usuario user = null;
-
-		user = sTool.authenticateToken(request);
-
-		return user;
-	}
-
-	private boolean isAnAdministrator (
-			Usuario user,
-			HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		if (user == null || user.getTipoUsuario() == "Administrador") {
-			request.setAttribute("errorType", "Sitio Restringido");
-			request.setAttribute(
-					"errorMessage",
-					"Lo sentimos, esta pagina esta reservada solo para personal");
-			try {
-				request.getServletContext().getRequestDispatcher(errorView).forward(request, response);
-				return false;
-			} catch (ServletException | IOException e) {
-				e.printStackTrace();
-				System.out.println("[ERROR] Error while dispatching to Error View");
-			}
-		}
-		request.setAttribute("authUser", user);// Maybe better to set a Hashmap
-		// or static class here
-		return true;
-	}
-
 
 }

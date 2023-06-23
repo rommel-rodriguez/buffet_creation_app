@@ -21,6 +21,7 @@ import dal.ComidaDao;
 import dal.ComidaDAOI;
 import dal.Conexion;
 import utils.tools.AppPath;
+import utils.tools.SessionTool;
 
 /**
  * Servlet implementation class RecetaController
@@ -31,38 +32,32 @@ public class RecetaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String recetasView = new AppPath()
 			.convertToView("administration/Receta.jsp");
+	String errorView = new AppPath()
+			.convertToView("administration/error.jsp");
+	SessionTool sessTool = new SessionTool();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public RecetaController() {
         super();
-        
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: Surroung all Connection related code with appropriate try-catch
-		// blocks.
+
+		if (!sessTool.isAnAdministrator(sessTool.getAuthUser(request), request, response, errorView))
+			return;
+
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
 		RecetaDAOI recDao = new RecetaDao(con); 
 		ComidaDAOI comDao = new ComidaDao(con); 
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Hitting this endpoint");
 		List<Receta> listaRecetas = recDao.listRecetas();
 		List<Comida> listaComidas = comDao.listComidas();
 		request.setAttribute("recetas", listaRecetas);
 		request.setAttribute("comidas", listaComidas);
-//		request.getRequestDispatcher("Vista/Mantenimiento/Recetas.jsp").forward(request, response);
 		System.out.printf("This is recetasView's Path: %s\n", recetasView);
 		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());
 		System.out.printf("This is the context Path: %s\n", getServletContext().getContextPath());
-//		request.getRequestDispatcher(recetasView).forward(request, response);
 		getServletContext().getRequestDispatcher(recetasView).forward(request, response);
 	}
 
@@ -70,19 +65,16 @@ public class RecetaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: Surroung all Connection related code with appropriate try-catch
-		// blocks.
+
+		if (!sessTool.isAnAdministrator(sessTool.getAuthUser(request), request, response, errorView))
+			return;
+
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
 		RecetaDAOI recDao = new RecetaDao(con); 
 		String accion = request.getParameter("accion");
-//		System.out.printf(
-//				"Recetas PostMethod: accion=%s\n",
-//				accion
-//				);
 
-//
 		Receta rec = new Receta();
         switch (accion) {
 			case "Agregar" :

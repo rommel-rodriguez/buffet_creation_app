@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.entities.Categoria;
 import models.entities.Insumo;
+import models.entities.Usuario;
 // import models.entities.Usuario;
 import dal.InsumoDAOI;
 import dal.InsumoDao;
@@ -21,6 +22,7 @@ import dal.CategoriaDAO;
 import dal.CategoriaDAOI;
 import dal.Conexion;
 import utils.tools.AppPath;
+import utils.tools.SessionTool;
 
 /**
  * Servlet implementation class InsumoController
@@ -31,22 +33,21 @@ public class InsumoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String insumosView = new AppPath()
 			.convertToView("administration/Insumos.jsp");
+	String errorView = new AppPath()
+			.convertToView("administration/error.jsp");
+	SessionTool sessTool = new SessionTool();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public InsumoController() {
         super();
-        
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		// Usuario user = sessTool.getAuthUser(request);
+
+		if (!sessTool.isAnAdministrator(sessTool.getAuthUser(request), request, response, errorView))
+			return;
+
 		System.out.println("Hitting this endpoint");
 		Conexion conFactory = new Conexion();
 		Connection con = conFactory.getDBConnection();
@@ -70,11 +71,11 @@ public class InsumoController extends HttpServlet {
 		getServletContext().getRequestDispatcher(insumosView).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		if (!sessTool.isAnAdministrator(sessTool.getAuthUser(request), request, response, errorView))
+			return;
+
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();

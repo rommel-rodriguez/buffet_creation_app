@@ -17,6 +17,7 @@ import dal.UsuarioDAOI;
 import dal.UsuarioDAO;
 import dal.Conexion;
 import utils.tools.AppPath;
+import utils.tools.SessionTool;
 
 /**
  * Servlet implementation class UsuarioController
@@ -27,55 +28,51 @@ public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String usuariosView = new AppPath()
 			.convertToView("administration/Usuarios.jsp");
+	String errorView = new AppPath()
+			.convertToView("administration/error.jsp");
+	SessionTool sessTool = new SessionTool();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UsuarioController() {
         super();
-        
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surround all Connection related code with appropriate try-catch
 		// blocks.
+
+		Usuario user = sessTool.getAuthUser(request);
+
+		if (!sessTool.isAnAdministrator(user, request, response, errorView))
+			return;
+
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
 		UsuarioDAOI catDao = new UsuarioDAO(con); 
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Hitting this endpoint");
 		List<Usuario> listaUsuarios = catDao.listUsuarios();
 		request.setAttribute("usuarios", listaUsuarios);
-//		request.getRequestDispatcher("Vista/Mantenimiento/Usuarios.jsp").forward(request, response);
 		System.out.printf("This is usuariosView's Path: %s\n", usuariosView);
 		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());
 		System.out.printf("This is the context Path: %s\n", getServletContext().getContextPath());
-//		request.getRequestDispatcher(usuariosView).forward(request, response);
 		getServletContext().getRequestDispatcher(usuariosView).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: Surroung all Connection related code with appropriate try-catch
 		// blocks.
+
+		Usuario user = sessTool.getAuthUser(request);
+
+		if (!sessTool.isAnAdministrator(user, request, response, errorView))
+			return;
+
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
 		UsuarioDAOI userDao = new UsuarioDAO(con); 
 		String accion = request.getParameter("accion");
-//		System.out.printf(
-//				"Usuarios PostMethod: accion=%s\n",
-//				accion
-//				);
 
-//
         switch (accion) {
 			case "Agregar" :
 				String nomUsuario = request.getParameter("txtnom");
