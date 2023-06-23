@@ -19,28 +19,6 @@ public class UsuarioDAO implements UsuarioDAOI{
     	this.con = con;
     }
     
-//    public String login(Usuario usu)throws Exception
-//    {
-//        String estado = "";
-//        ResultSet rs;
-//        try 
-//        {
-//            con=cn.getDBConnection();
-//            String sql = "select tipoUsuario from usuario where nombreUsuario=? and clave=?";
-//            ps=con.prepareStatement(sql);
-//            ps.setString(1, usu.getNombreUsuario());
-//            ps.setString(2, usu.getClave());
-//            rs= ps.executeQuery();
-//            if (rs.next()) {
-//                estado = "true";
-//            }
-//            usu.setTipoUsuario(rs.getString("tipoUsuario"));
-//        } catch (Exception e) 
-//        {
-//            throw e;
-//        }
-//        return estado;
-//    }
     
     public Usuario showUsuario(int cod) {
         Usuario usuario = new Usuario();
