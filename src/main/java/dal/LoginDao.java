@@ -38,7 +38,6 @@ public class LoginDao implements LoginDaoI {
 		
 		Usuario createdUser = new Usuario();
 		
-//		Map<String, ?> userData = new HashMap<>();
 		
 		System.out.println("[INFO] Inside LoginDao.createUser");
 		System.out.println("[INFO] Usuario: " + user);
@@ -118,14 +117,10 @@ public class LoginDao implements LoginDaoI {
 		String token = null;
 		String path = generateLoginServiceBaseUri(tokenPath);
 		
-//		Map<String, ?> userData = new HashMap<>();
-		
 		System.out.println("[INFO] Inside LoginDao.loginUser");
 		System.out.println("[INFO] Token Path: " + tokenPath);
 		System.out.println("[INFO] Full Create Path: " + path);
 		
-//		if (user.getNombreUsuario() == null ||  user.getNombreUsuario().isBlank())
-//			user.setNombreUsuario("Anonymous");
 
 		ObjectMapper objectMapper = new ObjectMapper();
 
@@ -274,12 +269,6 @@ public class LoginDao implements LoginDaoI {
 		
 	}
 	
-//	private String jsonPayloadFromMap(Map map) throws JsonProcessingException {
-//		ObjectMapper mapper = new ObjectMapper();
-//		String jsonResult = mapper.writerWithDefaultPrettyPrinter()
-//		  .writeValueAsString(map);	
-//		return jsonResult;
-//	}
 	
 	private HttpRequest generateJsonPayloadRequest (
 			String jsonBody,

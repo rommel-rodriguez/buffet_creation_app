@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import models.entities.Usuario;
 // import models.entities.Usuario;
 import dal.UsuarioDAOI;
+import dal.UsuarioMicroDao;
 import dal.UsuarioDAO;
 import dal.Conexion;
 import utils.tools.AppPath;
@@ -48,9 +49,10 @@ public class UsuarioController extends HttpServlet {
 		Conexion conFactory = new Conexion();
         Connection con;
 		con = conFactory.getDBConnection();
-		UsuarioDAOI catDao = new UsuarioDAO(con); 
+//		UsuarioDAOI catDao = new UsuarioDAO(con); 
+		UsuarioDAOI lmDao = new UsuarioMicroDao(); // Login microservice DAO
 		System.out.println("Hitting this endpoint");
-		List<Usuario> listaUsuarios = catDao.listUsuarios();
+		List<Usuario> listaUsuarios = lmDao.listUsuarios();
 		request.setAttribute("usuarios", listaUsuarios);
 		System.out.printf("This is usuariosView's Path: %s\n", usuariosView);
 		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());
