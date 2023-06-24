@@ -88,10 +88,6 @@ public class UsuarioController extends HttpServlet {
 				objCat.setEstado(estado);
 				
 				userDao.createUsuario(objCat);
-//				flag = "CAT";
-//				request.setAttribute("flag", flag);
-//				request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);
-//				request.getRequestDispatcher(usuariosView).forward(request, response);
 				doGet(request, response);
 				break;
 			case "EditarUsuario":

@@ -50,14 +50,6 @@ public class LoginDao implements LoginDaoI {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 
-//		JsonNode payload = objectMapper.createObjectNode()
-//				.put("email", user.getEmail())
-//				.put("password", user.getClave())
-//				.put("name", user.getNombreUsuario())
-//				.put("user_type", "Cliente")
-//				.put("user_state", "R");
-//		
-//		String postBody = payload.toString();
 
 		JsonNode payload = objectMapper.createObjectNode()
 				.put("email", user.getEmail())
