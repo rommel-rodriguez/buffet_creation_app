@@ -43,6 +43,7 @@ public class CategoriaController extends HttpServlet {
 
 		Usuario user = sessTool.getAuthUser(request);
 
+		System.out.println("Categorias endpoint" + user);
 		if (!sessTool.isAnAdministrator(user, request, response, errorView))
 			return;
 		

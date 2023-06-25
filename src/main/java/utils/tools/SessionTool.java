@@ -104,7 +104,7 @@ public class SessionTool {
 			HttpServletResponse response,
 			String errorView) {
 		
-		if (user == null || user.getTipoUsuario() == "Administrador") {
+		if ( (user == null) || !user.getTipoUsuario().equals("Administrador")) {
 			request.setAttribute("errorType", "Sitio Restringido");
 			request.setAttribute(
 					"errorMessage",
@@ -115,6 +115,7 @@ public class SessionTool {
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 				System.out.println("[ERROR] Error while dispatching to Error View");
+				return false;
 			}
 		}
 		request.setAttribute("authUser", user);// Maybe better to set a Hashmap

@@ -205,16 +205,188 @@ public class UsuarioMicroDao implements UsuarioDAOI {
 
 	@Override
 	public Usuario showUsuario(int id) {
+
+		String showBaseUrl = generateLoginServiceBaseUri(findByIdPath);
+		String showFullUrl = String.format(showBaseUrl + "%d/", id);
+		Usuario foundUser = new Usuario();
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(showFullUrl))
+				.header("accept", "application/json")
+				.build();
+
+        String responseBody = null;
+
+		int statusCode = 0; 
+
+        try {
+            HttpResponse<String> response =
+            		httpClient
+            		.send(
+						request,
+						HttpResponse.BodyHandlers.ofString()
+					);
+            statusCode = response.statusCode();
+
+            if (statusCode != 200) {
+                System.out.println("Request failed with status code: " + statusCode);
+                System.out.println("Response's body:\n" + responseBody);
+                // TODO: Here I should raise an exception for the controller to
+                // handle.
+                return null;
+            }
+
+			responseBody = response.body();
+
+			System.out.println("[INFO] Response's body:\n" + responseBody);
+
+			// Parse the JSON response using Jackson
+			JsonNode jsonNode = objectMapper.readTree(responseBody);
+
+			int retId = jsonNode.get("id").asInt();
+			String email = jsonNode.get("email").asText();
+//			String name = jsonNode.get("name").asText();
+			String name = email;
+			String tipoUsuario = jsonNode.get("user_type").asText();
+			String estado = jsonNode.get("user_state").asText();
+
+			foundUser.setIdUsuario(retId);
+			foundUser.setEmail(email);
+			foundUser.setNombreUsuario(name);
+			foundUser.setTipoUsuario(tipoUsuario);
+			foundUser.setEstado(estado);
+
+			return foundUser;
+
+        } catch (Exception e) {
+					System.out.println("Request failed: " + e);
+					System.out.println("Request failed: " + e.getMessage());
+					System.out.println("Status Code: " + statusCode);
+		}
+
 		return null;
 	}
 
 	@Override
 	public void updateUsuario(Usuario usuario) {
 
+		String updateBaseUrl = generateLoginServiceBaseUri(updatePath);
+		int id = usuario.getIdUsuario();
+		String updateFullUrl = String.format(updateBaseUrl + "%d/", id);
+		Usuario user = new Usuario();
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		String path = generateLoginServiceBaseUri(createPath);
+		
+		Usuario createdUser = new Usuario();
+		
+		System.out.println("[INFO] Inside Usuario.createUser");
+		System.out.println("[INFO] Usuario: " + user);
+		System.out.println("[INFO] Create Path: " + createPath);
+		System.out.println("[INFO] Full Update URL: " + updateFullUrl);
+		
+		if (user.getNombreUsuario().isBlank())
+			user.setNombreUsuario("Anonymous");
+
+
+		JsonNode payload = objectMapper.createObjectNode()
+				.put("email", user.getEmail())
+				.put("password", user.getClave())
+				.put("name", user.getNombreUsuario())
+				.put("user_type", "Cliente")
+				.put("user_state", "R");
+		
+		String jsonBody = payload.toString();
+
+
+        HttpRequest request = generateJsonPayloadRequest(jsonBody, "put", path);
+        
+        String responseBody = null;
+		int statusCode = 0; 
+        try {
+            HttpResponse<String> response =
+            		httpClient
+            		.send(
+						request,
+						HttpResponse.BodyHandlers.ofString()
+					);
+            statusCode = response.statusCode();
+			responseBody = response.body();
+
+            if (statusCode != 200) {
+                System.out.println("Request failed with status code: " + statusCode);
+                System.out.println("Response's body:\n" + responseBody);
+                // TODO: Here I should raise an exception for the controller to
+                // handle.
+                return;
+            }
+
+
+			// TODO: Raise exception here and add throws to function.
+			return;
+
+        } catch (Exception e) {
+            System.out.println("Request failed: " + e);
+            System.out.println("Request failed: " + e.getMessage());
+            System.out.println("Status Code: " + statusCode);
+        }
+
+		// TODO: Raise exception here and add throws to function.
+		return;
 	}
 
 	@Override
 	public void deleteUsuario(int id) {
+		String deleteBaseUrl = generateLoginServiceBaseUri(findByIdPath);
+		String deleteFullUrl = String.format(deleteBaseUrl + "%d/", id);
+
+		Usuario user = new Usuario();
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(deleteFullUrl))
+				.DELETE()
+				.header("accept", "application/json")
+				.build();
+
+        String responseBody = null;
+
+		int statusCode = 0; 
+
+        try {
+            HttpResponse<String> response =
+            		httpClient
+            		.send(
+						request,
+						HttpResponse.BodyHandlers.ofString()
+					);
+
+            statusCode = response.statusCode();
+			responseBody = response.body();
+
+            if (statusCode != 200) {
+                System.out.println("Request failed with status code: " + statusCode);
+                System.out.println("Response's body:\n" + responseBody);
+                // TODO: Here I should raise an exception for the controller to
+                // handle.
+                return;
+            }
+
+			System.out.println(""
+					+ "[INFO] Successfully "
+					+ "deleted user with ID: "
+					+ id);
+
+			return;
+
+        } catch (Exception e) {
+					System.out.println("Request failed: " + e);
+					System.out.println("Request failed: " + e.getMessage());
+					System.out.println("Status Code: " + statusCode);
+		}
+
+		return;
 
 	}
 

@@ -290,7 +290,7 @@ INSERT INTO `tipocomida` (`idTipoComida`, `nombre`) VALUES
 -- Volcando estructura para tabla ollitape.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
-  `nombreUsuario` varchar(100) DEFAULT NULL,
+  `nombreUsuario` varchar(254) DEFAULT NULL,
   `clave` varchar(100) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
   `tipoUsuario` varchar(100) DEFAULT NULL,
@@ -302,8 +302,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcando datos para la tabla ollitape.usuario: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `clave`, `foto`, `tipoUsuario`, `estado`) VALUES
-	(1, 'Administrador', '123456', '', 'Administrador', 'P'),
-	(6, 'Pepito', '123456', '.', 'Cliente', 'R');
+	(2, 'microadministrator@login.com', '123456', '', 'Administrador', 'P'),
+	(100, 'thisisaclient@example.com', '123456', '.', 'Cliente', 'R');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

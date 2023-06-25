@@ -73,6 +73,8 @@ public class UsuarioController extends HttpServlet {
         Connection con;
 		con = conFactory.getDBConnection();
 		UsuarioDAOI userDao = new UsuarioDAO(con); 
+		UsuarioDAOI lmDao = new UsuarioMicroDao(); // Login microservice DAO
+
 		String accion = request.getParameter("accion");
 
         switch (accion) {
@@ -83,25 +85,30 @@ public class UsuarioController extends HttpServlet {
 				String tipoUsuario = request.getParameter("cboTipoUsuario");
 				String estado = request.getParameter("cboEstado");
 				Usuario objCat = new Usuario(); 
+
 				objCat.setNombreUsuario(nomUsuario);
+				objCat.setEmail(nomUsuario);
 				objCat.setClave(clave);
 				objCat.setFoto(foto);
 				objCat.setTipoUsuario(tipoUsuario);
 				objCat.setEstado(estado);
 				
+				lmDao.createUsuario(objCat);
+//				obCat.setClave(" ");
 				userDao.createUsuario(objCat);
 				doGet(request, response);
 				break;
 			case "EditarUsuario":
 				int idCatEdit = Integer.parseInt(request.getParameter("cod"));
-				Usuario catEditar = userDao.showUsuario(idCatEdit);
+//				Usuario catEditar = userDao.showUsuario(idCatEdit);
+				Usuario catEditar = lmDao.showUsuario(idCatEdit);
 				request.setAttribute("usuario", catEditar);
 
 				doGet(request, response);
 				break;
             case "Actualizar":
             	
-				String usuarioUp = request.getParameter("txtnom");
+				String nombreUp = request.getParameter("txtnom");
 				int codCatUp = Integer.parseInt(request.getParameter("txtCod"));
 				String fotoUp= request.getParameter("txtfoto");
 				String claveUp = request.getParameter("txtclave");
@@ -111,12 +118,15 @@ public class UsuarioController extends HttpServlet {
 				Usuario obUsuarioUp = new Usuario();
 
 				obUsuarioUp.setIdUsuario(codCatUp);
-				obUsuarioUp.setNombreUsuario(usuarioUp);
+				obUsuarioUp.setNombreUsuario(nombreUp);
+				obUsuarioUp.setEmail(nombreUp);
 				obUsuarioUp.setClave(claveUp);
 				obUsuarioUp.setFoto(fotoUp);
 				obUsuarioUp.setTipoUsuario(tipoUsuarioUp);
 				obUsuarioUp.setEstado(estadoUp);
 
+				lmDao.updateUsuario(obUsuarioUp);
+//				obUsuarioUp.setClave(" ");
 				userDao.updateUsuario(obUsuarioUp);
 
 				doGet(request, response);
@@ -125,6 +135,7 @@ public class UsuarioController extends HttpServlet {
 				int idUserElim = Integer.parseInt(request.getParameter("cod"));
 
 				userDao.deleteUsuario(idUserElim);
+				lmDao.deleteUsuario(idUserElim);
 
 				doGet(request, response);
 				break;

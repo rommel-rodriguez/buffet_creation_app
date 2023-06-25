@@ -72,7 +72,7 @@ public class UsuarioDAO implements UsuarioDAOI{
             con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
             ps.setObject(1, usuario.getNombreUsuario());
-            ps.setObject(2, usuario.getClave());
+            ps.setObject(2, usuario.getClave()); // NOTE: Should no longer do anything
             ps.setObject(3, usuario.getFoto());
             ps.setObject(4, usuario.getTipoUsuario());
             ps.setObject(5, usuario.getEstado());
