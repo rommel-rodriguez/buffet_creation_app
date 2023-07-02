@@ -10,11 +10,13 @@ public class AppPath {
 	
 
 	public String convertToPrivate(String path) {
-		return Paths.get(privatePath, path).toString();
+//		return Paths.get(privatePath, path).toString();
+		return privatePath + "/" + path;
 	}
 
 	public String convertToView(String path) {
-		return Paths.get(convertToPrivate(viewsDir), path).toString();
+//		return Paths.get(convertToPrivate(viewsDir), path).toString();
+		return convertToPrivate(viewsDir) + "/" +  path;
 	}
 
 }
