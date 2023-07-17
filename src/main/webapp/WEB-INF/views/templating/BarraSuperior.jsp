@@ -5,14 +5,23 @@
                 class="fas fa-bars"></i></button>
         <button class="btn btn-light d-inline-block d-lg-none ml-auto collapsed" data-bs-toggle="collapse" data-bs-target="#barra" aria-expanded="false"><i
                 class="fas fa-angle-down"></i></button>
-        <div class="collapse navbar-collapse" id="barra">
+        <div class="collapse navbar-collapse justify-content-end" id="barra">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="dropdown-item disabled" href="javascript:void(0)"><i class="fas fa-user"></i> Koalita Feliz</a>
+                    <a class="dropdown-item disabled" href="javascript:void(0)"><i class="fas fa-user"></i> User</a>
                 </li>
                 <li class="nav-item">
-                    <a class="dropdown-item disabled" href="javascript:void(0)"><i class="fas fa-smile"></i> XT8090</a>
+                    <a class="dropdown-item disabled" href="javascript:void(0)"><i class="fas fa-smile"></i> Id</a>
                 </li>
+                <li class="nav-item  disabled">
+                    <a class="dropdown-item" href="${rootPath}/login">
+                     <!--  <i class="fa fa-sign-in"></i> -->
+                     <i class="bi bi-door-open"></i>
+                     Login
+										</a>
+									
+                </li>
+
             </ul>
         </div>
     </div>
