@@ -1,0 +1,25 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: login-deployment 
+  labels:
+    tier: back-end
+    service: login
+    env: dev
+spec:
+  template:
+    metadata:
+      name: main-pod 
+      labels:
+        tier: front-end
+        env: dev
+    spec:
+      containers:
+        - name: webdev-app
+          image: rommelrodperez/buffetapp:login
+      imagePullSecrets:
+        - name: regcred
+  replicas: 2 
+  selector:
+    matchLabels:
+      env: dev

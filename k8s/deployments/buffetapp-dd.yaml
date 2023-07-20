@@ -1,0 +1,39 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: test-deployment
+  labels:
+    env: dev
+spec:
+  template:
+    metadata:
+      name: main-pod 
+      labels:
+        tier: front-end
+        env: dev
+    spec:
+      containers:
+        - name: webdev-app
+          image: rommelrodperez/buffetapp:app
+          env:
+          - name: DB_HOST
+            value: db
+          - name: DB_NAME
+            value: ollitape
+          - name: DB_USER
+            value: devuser
+          - name: DB_PASS
+            value: changeme
+          - name: DB_PORT
+            value: "3306"
+          - name: LOGIN_HOST
+            value: login
+          - name: LOGIN_PORT
+            value: "8000"
+      imagePullSecrets:
+        - name: regcred
+
+  replicas: 2 
+  selector:
+    matchLabels:
+      env: dev
