@@ -1,6 +1,5 @@
 package dal;
 import models.entities.Usuario;
-import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class UsuarioDAO implements UsuarioDAOI{
     Conexion cn = new Conexion();
     Connection con;

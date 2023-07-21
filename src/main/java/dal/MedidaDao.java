@@ -7,7 +7,6 @@
 package dal;
 
 import models.entities.Medida;
-import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MedidaDao implements ollitaPeCRUD {
+public class MedidaDao {
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
@@ -51,7 +50,6 @@ public class MedidaDao implements ollitaPeCRUD {
         return med;
     }
     
-    @Override
     public List listar() {
         String sql = "select * from medida";
         List<Medida> lista = new ArrayList<>();
@@ -80,18 +78,4 @@ public class MedidaDao implements ollitaPeCRUD {
         return lista;
     }
 
-    @Override
-    public int agregar(Object[] o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int actualizar(Object[] o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void eliminar(int cod) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

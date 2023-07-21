@@ -9,11 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * 
- */
-// public class InsumoDao implements ollitaPeCRUD{
-
 public class InsumoDao implements InsumoDAOI{
     Conexion cn = new Conexion();
     Connection con;

@@ -83,15 +83,21 @@ public class InsumoController extends HttpServlet {
 		String accion = request.getParameter("accion");
 
         switch (accion) {
-			case "AgregarInsumo" :
+			case "Agregar" :
+				System.out.println("[DEBUG] Testing agregar button failing");
 				String nom = request.getParameter("txtnom");
 				int categ = Integer.parseInt(request.getParameter("cboCategoria"));
 				int med = Integer.parseInt(request.getParameter("cboMedida"));
 				double prec = Double.parseDouble(request.getParameter("txtprecio"));
+				if ( !(prec >= 0)) {
+					doGet(request, response);
+					return;
+				}
 				Insumo ins = new Insumo(); 
 				ins.setNom(nom);
 				ins.setCodCat(categ);
 				ins.setPrecio(prec);
+				ins.setCodMed(med);
 				insDao.createInsumo(ins);
 				doGet(request, response);
 				break;

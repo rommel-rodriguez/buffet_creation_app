@@ -1,6 +1,5 @@
 package dal;
 import models.entities.Receta;
-import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +42,19 @@ public class RecetaDao implements RecetaDAOI{
 
     @Override
     public List<Receta> listRecetas() {
-        String sql = "SELECT cabreceta.idCabReceta, cabreceta.nombre, usuario.nombreUsuario, tipocomida.nombre, cabreceta.foto, cabreceta.link, cabreceta.estado FROM cabreceta INNER JOIN usuario ON cabreceta.idUsuario = usuario.idUsuario INNER JOIN tipocomida ON cabreceta.tipo = tipocomida.idTipoComida ORDER BY cabreceta.idCabReceta";
+        String sql = 
+			"SELECT \r\n"
+			+ "    cabreceta.idCabReceta,\r\n"
+			+ "    cabreceta.nombre,\r\n"
+			+ "    usuario.nombreUsuario,\r\n"
+			+ "    tipocomida.nombre,\r\n"
+			+ "    cabreceta.foto,\r\n"
+			+ "    cabreceta.link,\r\n"
+			+ "    cabreceta.estado\r\n"
+			+ "    FROM cabreceta\r\n"
+			+ "    LEFT OUTER JOIN usuario ON cabreceta.idUsuario = usuario.idUsuario\r\n"
+			+ "    INNER JOIN tipocomida ON cabreceta.tipo = tipocomida.idTipoComida\r\n"
+			+ "    ORDER BY cabreceta.idCabReceta";
         List<Receta> lista = new ArrayList<>();
         try {
 //            con = cn.getDBConnection();

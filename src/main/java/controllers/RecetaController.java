@@ -49,13 +49,22 @@ public class RecetaController extends HttpServlet {
         Connection con;
 		con = conFactory.getDBConnection();
 		RecetaDAOI recDao = new RecetaDao(con); 
-		ComidaDAOI comDao = new ComidaDao(con); 
+//		ComidaDAOI comDao = new ComidaDao(con); 
+		ComidaDAOI comDao = new ComidaDao(conFactory.getDBConnection()); 
 		System.out.println("Hitting this endpoint");
 		List<Receta> listaRecetas = recDao.listRecetas();
 		List<Comida> listaComidas = comDao.listComidas();
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.setAttribute("recetas", listaRecetas);
 		request.setAttribute("comidas", listaComidas);
 		System.out.printf("This is recetasView's Path: %s\n", recetasView);
+		System.out.printf("This is recetasView's recetas: %s\n", listaRecetas);
+		System.out.printf("This is recetasView's comidas: %s\n", listaComidas);
 		System.out.printf("This is the Request context Path: %s\n", request.getContextPath());
 		System.out.printf("This is the context Path: %s\n", getServletContext().getContextPath());
 		getServletContext().getRequestDispatcher(recetasView).forward(request, response);
@@ -78,6 +87,7 @@ public class RecetaController extends HttpServlet {
 		Receta rec = new Receta();
         switch (accion) {
 			case "Agregar" :
+				System.out.println("[DEBUG] Testing [RECETA] agregar button failing");
 				String nom = request.getParameter("txtnom");
 				int usuario = Integer.parseInt(request.getParameter("txtuser"));
 				int comida = Integer.parseInt(request.getParameter("cboComidas"));
