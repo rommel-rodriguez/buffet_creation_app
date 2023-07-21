@@ -87,4 +87,10 @@
         scrollX: false,
         lengthMenu: paginadoVenta
     });
+    $('#tablaReceta').DataTable({
+        language: traduccion,
+        scrollY: 300,
+        scrollX: false,
+        lengthMenu: paginadoVenta
+    });
 });

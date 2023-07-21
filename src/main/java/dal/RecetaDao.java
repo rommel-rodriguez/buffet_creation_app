@@ -20,7 +20,20 @@ public class RecetaDao implements RecetaDAOI{
     
     public Receta showReceta(int cod) {
         Receta receta = new Receta();
-        String sql = "select * from cabreceta where idcabreceta=" + cod;
+//        String sql = "select * from cabreceta where idcabreceta=" + cod;
+		String sql = "SELECT\r\n"
+						+ "    idCabReceta,\r\n"
+						+ "    nombre,\r\n"
+						+ "    cr.idUsuario,\r\n"
+						+ "    tipo,\r\n"
+						+ "    cr.foto,\r\n"
+						+ "    link,\r\n"
+						+ "    cr.estado,\r\n"
+						+ "    u.nombreUsuario\r\n"
+						+ "FROM cabreceta cr\r\n"
+						+ "LEFT OUTER JOIN usuario u ON cr.idUsuario = u.idUsuario \r\n"
+						+ "WHERE idcabreceta="
+						+ cod;
         try {
 //            con = cn.getDBConnection();
             ps = con.prepareStatement(sql);
@@ -33,6 +46,7 @@ public class RecetaDao implements RecetaDAOI{
                 receta.setFoto(rs.getString(5));
                 receta.setLinkReceta(rs.getString(6));
                 receta.setEstado(rs.getString(7)); 
+                receta.setUsuario(rs.getString(8)); 
             }
         } catch (SQLException e) {
             System.err.println( e);

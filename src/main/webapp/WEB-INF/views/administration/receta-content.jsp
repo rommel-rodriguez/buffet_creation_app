@@ -27,8 +27,8 @@
                                                 <input type="text" class="form-control" value="${receta.getNombre()}" name="txtnom" id="txtnom" placeholder="Nombre de Receta" required>
                                             </div>
                                             <div class="col-md-2 mb-3">
-                                                <input type="text" class="form-control" value="1" name="txtuser" id="txtuser" readonly="true" required> Administrador
-                                            </div>
+                                                <!-- <input type="text" class="form-control" value="1" name="txtuser" id="txtuser" readonly="true" required> Administrador -->
+                                                <input type="text" class="form-control"  value="${receta.getIdUsuario()}"  name="txtuser" id="txtuser"  required> ${receta.getUsuario()} </div>
                                             <div class="col-md-2 mb-3">
                                                 <input type="hidden" value="<%= (receta != null ? receta.getIdTipoComida() : "")%>" id="txtComida" name="txtComida" readonly="true">
                                                 <select class="form-select" name="cboComidas" id="cboComidas" required>
