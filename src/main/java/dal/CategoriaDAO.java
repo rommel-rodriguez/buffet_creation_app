@@ -7,7 +7,6 @@
 package dal;
 
 import models.entities.Categoria;
-import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

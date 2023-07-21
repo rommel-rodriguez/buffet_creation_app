@@ -25,16 +25,16 @@
                                     <form class="needs-validation" id="frmUsuario" action="${rootPath}/usuarios/" method="POST">
                                         <input type="hidden" value="${usuario.getIdUsuario()}" id="txtCod" name="txtCod" readonly="true">
                                         <div class="row">
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-4 mb-4">
                                                 <input type="text" class="form-control" value="${usuario.getNombreUsuario()}" name="txtnom" id="txtnom" placeholder="Nombre de Usuario" required>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-4 mb-4">
                                                 <input type="password" class="form-control" value="${usuario.getClave()}" name="txtclave" id="txtnom" placeholder="Contraseña" required>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-4 mb-4">
                                                 <input type="text" class="form-control" value="${usuario.getFoto()}" name="txtfoto" id="txtfoto" placeholder="Seleccionar foto" required>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-4 mb-4">
                                             <select class="form-select" name="cboTipoUsuario" id="cboTipoUsuario" required>
                                                     <option value="">--Tipo de Usuario--</option>
                                                     <option value="Administrador">Administrador</option>
@@ -48,13 +48,16 @@
                                                     <option value="R">Restringido</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 mb-3">
-                                                <button type="submit" name="accion" id="btnGuardarUsuario" value="Agregar" class="btn btn-success btn-circle w-100"><i class="fas fa-plus"></i> Agregar</button>
-                                            </div>
-                                            <div class="col-md-2 mb-3">
-                                                <button type="submit" name="accion" value="Actualizar" class="btn btn-primary btn-circle w-100"><i class="fas fa-sync-alt"></i> Actualizar</button>                 
-                                            </div>
                                         </div>
+                                        <div class="row">
+																					<div class="col-md-2 mb-3">
+																							<button type="submit" name="accion" id="btnGuardarUsuario" value="Agregar" class="btn btn-success btn-circle w-100"><i class="fas fa-plus"></i> Agregar</button>
+																					</div>
+																					<div class="col-md-2 mb-3">
+																							<button type="submit" name="accion" value="Actualizar" class="btn btn-primary btn-circle w-100"><i class="fas fa-sync-alt"></i> Actualizar</button>                 
+																					</div>
+                                        </div>
+
                                     </form>
                                 </div>
                             </div>

@@ -1,7 +1,6 @@
 package dal;
 
 import models.entities.Insumo;
-import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

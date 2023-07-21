@@ -216,3 +216,7 @@ a.article:hover {
 .temblor:hover {
     -webkit-animation: animar 1.2s 50;
 }
+
+.form-group {
+		margin-bottom: 20px;
+}

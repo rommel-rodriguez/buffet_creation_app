@@ -1,7 +1,6 @@
 package dal;
 
 import models.entities.Comida;
-import models.interfaces.ollitaPeCRUD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

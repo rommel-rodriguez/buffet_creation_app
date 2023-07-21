@@ -123,4 +123,15 @@ public class SessionTool {
 		return true;
 	}
 
+	public String getToken(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String authToken = (String) session.getAttribute("token");
+		if (authToken == null) {
+			System.err.println("[ERROR] Auth Token is Null");
+			return null;
+		}
+		
+		return authToken;
+	}
+
 }

@@ -13,8 +13,8 @@
 <%-- <%@ include file="/WEB-INF/views/templating/base.jsp" %>--%>
 
 	<div class="container-fluid">
-					<h1>Test token: <c:out value="${authToken}" /></h1>
 	   <%--
+					<h1>Test token: <c:out value="${authToken}" /></h1>
 					<h1>Test token: <c:out value="${authToken}" /></h1>
 	    --%>
 			<div class="row">
