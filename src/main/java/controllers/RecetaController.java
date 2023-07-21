@@ -94,6 +94,21 @@ public class RecetaController extends HttpServlet {
 				String foto = request.getParameter("txtfoto");
 				String link = request.getParameter("txtlink");
 				String estado = request.getParameter("cboEstado");
+				
+				if (
+						usuario == 0 ||
+						comida == 0 ||
+						foto.equals("") ||
+						link.equals("") ||
+						estado.equals("")
+					) {
+					System.err.println("[ERROR] [RECETA] One of the input"
+							+ " fields is"
+							+ "not valid.");
+					doGet(request, response);
+					return;
+					
+				}
 
 				rec.setNombre(nom);
 				rec.setIdUsuario(usuario);

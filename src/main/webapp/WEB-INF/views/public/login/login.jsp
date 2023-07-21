@@ -28,7 +28,7 @@
             <h2 class="title">Ingresar</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Usuario" name="email" />
+              <input type="email" placeholder="Usuario" name="email" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>

@@ -82,6 +82,10 @@ a:focus {
     padding: 10px;
 }
 
+#dashboard {
+    color: #000000;
+}
+
 #sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;

@@ -52,9 +52,6 @@ public class InsumoController extends HttpServlet {
 		Conexion conFactory = new Conexion();
 		Connection con = conFactory.getDBConnection();
 		InsumoDAOI insDao = new InsumoDao(con); 
-		// New connection for this other dao, else the connection is closed in
-		// the dao before it.
-		// CategoriaDAOI catDao = new CategoriaDAO(); 
 		CategoriaDAOI catDao = new CategoriaDAO(conFactory.getDBConnection()); 
 		List<Insumo> listaInsumos = insDao.listInsumos();
 		List<Categoria> listaCategorias = catDao.listCategorias();
@@ -89,6 +86,7 @@ public class InsumoController extends HttpServlet {
 				int categ = Integer.parseInt(request.getParameter("cboCategoria"));
 				int med = Integer.parseInt(request.getParameter("cboMedida"));
 				double prec = Double.parseDouble(request.getParameter("txtprecio"));
+
 				if ( !(prec >= 0)) {
 					doGet(request, response);
 					return;

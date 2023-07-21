@@ -15,7 +15,7 @@ request.setAttribute("rootPath", rootPath);
     <ul class="list-unstyled components">
         <p>Bienvenido</p>
         <li class="mb-1">
-            <a href="${rootPath}/" class="link-light active" id="dashboard"> <i class="fas fa-home"></i><span class="nav_name"> Home</span> </a>
+            <a href="${rootPath}/" class="active" id="dashboard"> <i class="fas fa-home"></i><span class="nav_name"> Home</span> </a>
         </li>
         <p>Operaciones</p>
         <li class="mb-1">
