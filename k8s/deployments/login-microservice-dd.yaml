@@ -11,15 +11,27 @@ spec:
     metadata:
       name: main-pod 
       labels:
-        tier: front-end
+        tier: back-end
+        service: login
         env: dev
     spec:
       containers:
-        - name: webdev-app
+        - name: login-microservice
           image: rommelrodperez/buffetapp:login
+          command: ["sh","-c"]
+          args: ["python manage.py wait_for_db && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+          env:
+          - name: DB_HOST
+            value: logindb
+          - name: DB_NAME
+            value: devdb
+          - name: DB_USER
+            value: mainapp
+          - name: DB_PASS
+            value: changeme
       imagePullSecrets:
         - name: regcred
-  replicas: 2 
+  replicas: 1 
   selector:
     matchLabels:
       env: dev

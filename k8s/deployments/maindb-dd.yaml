@@ -1,23 +1,45 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: login-deployment 
+  name: maindb-deployment 
   labels:
     tier: back-end
-    service: login
+    service: main-db 
     env: dev
 spec:
   template:
     metadata:
       name: main-pod 
       labels:
-        tier: front-end
+        tier: back-end
+        service: main-db 
         env: dev
     spec:
       containers:
-        - name: webdev-app
+        - name: webdev-main-db
           image: mysql:8.0-debian
-  replicas: 2 
+          volumeMounts:
+            - name: mysql-data 
+              mountPath: /var/lib/mysql
+            - mountPath: /docker-entrypoint-initdb.d
+              name: init-sql 
+          env:
+          - name: MYSQL_USER
+            value: devuser
+          - name: MYSQL_PASSWORD
+            value: changeme
+          - name: MYSQL_DATABASE
+            value: ollitape
+          - name: MYSQL_ROOT_PASSWORD
+            value: thisisnotsafe
+      volumes:
+        - name: init-sql
+          configMap:
+            name: init-sql
+        - name: mysql-data
+          hostPath:
+            path: /mysql_data
+  replicas: 1 
   selector:
     matchLabels:
       env: dev

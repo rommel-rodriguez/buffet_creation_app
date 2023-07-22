@@ -1,7 +1,7 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: test-deployment
+  name: buffet-main-app 
   labels:
     env: dev
 spec:
@@ -15,6 +15,7 @@ spec:
       containers:
         - name: webdev-app
           image: rommelrodperez/buffetapp:app
+          imagePullPolicy: Always
           env:
           - name: DB_HOST
             value: db

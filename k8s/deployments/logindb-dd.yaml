@@ -1,0 +1,38 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: logindb-deployment 
+  labels:
+    tier: back-end
+    service: login-db
+    env: dev
+spec:
+  template:
+    metadata:
+      name: main-pod 
+      labels:
+        tier: back-end
+        service: login-db
+        env: dev
+    spec:
+      containers:
+        - name: logindb
+          image: postgres:15.1-alpine
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: login-data 
+          env:
+          - name: POSTGRES_DB
+            value: devdb
+          - name: POSTGRES_USER
+            value: mainapp
+          - name: POSTGRES_PASSWORD
+            value: changeme
+      volumes:
+        - name: login-data
+          hostPath:
+            path: /login_data
+  replicas: 1 
+  selector:
+    matchLabels:
+      env: dev
