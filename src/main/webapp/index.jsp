@@ -22,7 +22,7 @@
     String anotherPath = "this/is/another/path"; 
 %>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
     <%-- <%@ include file='Vista/Genericos/Cabecera.jsp' %> --%>
     <jsp:include page="${cabeceraPath}" />
     <body>

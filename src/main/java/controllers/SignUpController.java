@@ -22,6 +22,8 @@ import dal.LoginDaoI;
 import dal.LoginDao;
 import utils.configuration.LoginMicroserviceConfiguration;
 import utils.tools.AppPath;
+import dal.UsuarioDAOI;
+import dal.UsuarioDAO;
 
 /**
  * Servlet implementation class CategoriaController
@@ -69,6 +71,7 @@ public class SignUpController extends HttpServlet {
         Connection con;
         // TODO: Need to replicate user creation in the other database as well...
 		con = conFactory.getDBConnection();
+		UsuarioDAOI usDao = new UsuarioDAO(con); 
 
 		String email = request.getParameter("emailUsuario");
 		String nombre = request.getParameter("nombreUsuario");
@@ -105,6 +108,8 @@ public class SignUpController extends HttpServlet {
 		createdUser.setNombreUsuario(nombre);
 		createdUser.setClave(first_password);
 		Usuario returnedUser = loginDao.createUser(createdUser);
+		createdUser.setNombreUsuario(email);
+		usDao.createUsuario(createdUser);
 		
 		if (returnedUser!= null) {
 			// TODO: I think I should be doing something with the returnedUser

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
         <button id="sidebarCollapse" class="btn btn-light" type="button"><i
                 class="fas fa-bars"></i></button>

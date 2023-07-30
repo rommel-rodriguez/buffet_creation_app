@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body {
     font-family: 'Open Sans', sans-serif;
-    background: #fafafa;
+    /* background: #fafafa; */
 }
 
 p {
@@ -22,7 +22,7 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fb6922;
+    background: rgb(90, 60, 190);
     border: none;
     color: #000000;
     border-radius: 0;
@@ -58,8 +58,11 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
+    /*
     background: #F4F4F4;
     color: #000000;
+    */
+    color: #F4F4F4;
     transition: all 0.3s;
 }
 
@@ -69,7 +72,7 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #FB980F;
+    background: #4f3172;
 }
 
 #sidebar ul.components {
@@ -78,12 +81,12 @@ a:focus {
 }
 
 #sidebar ul p {
-    color: #000000;
+    color: rgb(255, 255, 255);
     padding: 10px;
 }
 
-#dashboard {
-    color: #000000;
+#dashboard{
+	color: rgb(255, 255, 255)  ;
 }
 
 #sidebar ul li a {
@@ -94,13 +97,13 @@ a:focus {
 
 #sidebar ul li a:hover {
     color: #000000;
-    background: #fb980f;
+    background: #5a3cbe;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #000000;
-    background: #fb980f;
+    background: #344c9a;
 }
 
 a[data-toggle="collapse"] {
@@ -118,7 +121,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #FB980F;
+    background: #3c48a2;
 }
 
 ul.CTAs {
@@ -135,7 +138,7 @@ ul.CTAs a {
 
 a.article,
 a.article:hover {
-    background: #fb6922 !important;
+    background: #294782 !important;
     color: #ffffff !important;
 }
 
@@ -223,4 +226,8 @@ a.article:hover {
 
 .form-group {
 		margin-bottom: 20px;
+}
+
+.nav-item {
+	margin-right: 4px;
 }

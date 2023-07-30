@@ -6,7 +6,7 @@
 String rootPath = request.getContextPath();
 request.setAttribute("rootPath", rootPath);
 %>
-<nav id="sidebar">
+<nav id="sidebar" data-bs-theme="light">
     <br>
     <div class="temblor">
         <!-- <img src="assets/img/cacerola.png" alt="user" class="" width="200"> -->
