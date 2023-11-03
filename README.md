@@ -15,9 +15,14 @@ Domain Scope: Inventory and Application user management.
 
 ![Java JDK Version](https://img.shields.io/badge/Java%20JDK-17%2B-blue.svg)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.9-blue.svg)
+![Django](https://img.shields.io/badge/Django-4.2.2%2B-blue.svg)
 
 The application is fully containerized and includes the files for Kubernetes
 deployment.
+
+Includes a Django microservice for Application User authentication under the
+login_micro directory.
 
 ## Author
 
